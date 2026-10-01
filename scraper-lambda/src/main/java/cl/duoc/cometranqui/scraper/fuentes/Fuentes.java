@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import cl.duoc.cometranqui.scraper.ScraperConfig;
 import cl.duoc.cometranqui.scraper.fuentes.FuenteCatalogo.Tienda;
 import cl.duoc.cometranqui.scraper.http.ClienteHttp;
+import cl.duoc.cometranqui.scraper.locales.FuenteLocales;
+import cl.duoc.cometranqui.scraper.locales.OsmFuente;
 import cl.duoc.cometranqui.scraper.modelo.ClasificadorRestricciones;
 
 /**
@@ -46,6 +48,19 @@ public final class Fuentes {
         SHOPIFY.forEach(t -> codigos.add(t.codigo()));
         WOOCOMMERCE.forEach(t -> codigos.add(t.codigo()));
         return codigos;
+    }
+
+    public static List<FuenteLocales> localesActivos(ScraperConfig config) {
+        ClienteHttp http = new ClienteHttp(config.pausaMs());
+        List<FuenteLocales> fuentes = new ArrayList<>();
+        for (String nombre : config.localesActivos()) {
+            if (nombre.equalsIgnoreCase("OSM")) {
+                fuentes.add(new OsmFuente(http));
+            } else {
+                log.warn("Fuente de locales desconocida en LOCALES_ACTIVOS: {}", nombre);
+            }
+        }
+        return fuentes;
     }
 
     public static List<FuenteOfertas> activas(ScraperConfig config) {

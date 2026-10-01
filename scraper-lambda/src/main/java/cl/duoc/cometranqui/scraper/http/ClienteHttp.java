@@ -37,22 +37,27 @@ public class ClienteHttp {
      * @throws IOException ante errores de red o códigos distintos de 2xx/404 (ej. 403 por bloqueo anti-bot)
      */
     public Optional<String> get(String url) throws IOException {
-        return ejecutarPermitido(url, Connection.Method.GET, null, Map.of());
+        return ejecutarPermitido(url, Connection.Method.GET, null, Map.of(), TIMEOUT_MS);
+    }
+
+    /** GET con timeout propio, para APIs lentas como Overpass. */
+    public Optional<String> get(String url, int timeoutMs) throws IOException {
+        return ejecutarPermitido(url, Connection.Method.GET, null, Map.of(), timeoutMs);
     }
 
     /** POST con cuerpo JSON (APIs de búsqueda que usa el propio sitio, ej. Unimarc). */
     public Optional<String> postJson(String url, String json, Map<String, String> headers) throws IOException {
-        return ejecutarPermitido(url, Connection.Method.POST, json, headers);
+        return ejecutarPermitido(url, Connection.Method.POST, json, headers, TIMEOUT_MS);
     }
 
     private Optional<String> ejecutarPermitido(String url, Connection.Method metodo, String cuerpo,
-                                               Map<String, String> headers) throws IOException {
+                                               Map<String, String> headers, int timeoutMs) throws IOException {
         URI uri = URI.create(url);
         String rutaYQuery = uri.getRawPath() + (uri.getRawQuery() == null ? "" : "?" + uri.getRawQuery());
         if (!robots(uri).permite(rutaYQuery)) {
             throw new BloqueadoPorRobotsException(url);
         }
-        Connection.Response respuesta = ejecutar(url, metodo, cuerpo, headers);
+        Connection.Response respuesta = ejecutar(url, metodo, cuerpo, headers, timeoutMs);
         if (respuesta.statusCode() == 404) {
             return Optional.empty();
         }
@@ -65,7 +70,7 @@ public class ClienteHttp {
     private RobotsTxt robots(URI uri) {
         return robotsPorHost.computeIfAbsent(uri.getScheme() + "://" + uri.getHost(), base -> {
             try {
-                Connection.Response r = ejecutar(base + "/robots.txt", Connection.Method.GET, null, Map.of());
+                Connection.Response r = ejecutar(base + "/robots.txt", Connection.Method.GET, null, Map.of(), TIMEOUT_MS);
                 return r.statusCode() == 200 ? RobotsTxt.parsear(r.body(), USER_AGENT) : RobotsTxt.permitirTodo();
             } catch (IOException e) {
                 log.warn("No se pudo leer robots.txt de {}: {}", base, e.getMessage());
@@ -75,7 +80,7 @@ public class ClienteHttp {
     }
 
     private Connection.Response ejecutar(String url, Connection.Method metodo, String cuerpo,
-                                         Map<String, String> headers) throws IOException {
+                                         Map<String, String> headers, int timeoutMs) throws IOException {
         String host = URI.create(url).getHost();
         synchronized (candadoPorHost.computeIfAbsent(host, h -> new Object())) {
             pausar(host);
@@ -84,7 +89,7 @@ public class ClienteHttp {
                 Connection conexion = Jsoup.connect(url)
                         .method(metodo)
                         .userAgent(USER_AGENT)
-                        .timeout(TIMEOUT_MS)
+                        .timeout(timeoutMs)
                         .maxBodySize(0)
                         .ignoreContentType(true)
                         .ignoreHttpErrors(true)

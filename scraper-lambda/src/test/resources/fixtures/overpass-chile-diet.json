@@ -1,0 +1,2310 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-05-31T22:37:44Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1095859895,
+  "lat": -32.9695992,
+  "lon": -71.5444647,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "sandwich",
+    "diet:vegan": "yes",
+    "name": "Green Lab Reñaca",
+    "phone": "+56323627724"
+  }
+},
+{
+  "type": "node",
+  "id": 1482865804,
+  "lat": -41.3176934,
+  "lon": -72.9821681,
+  "tags": {
+    "addr:city": "Puerto Varas",
+    "addr:country": "CL",
+    "addr:district": "Puerto Varas",
+    "addr:housenumber": "430",
+    "addr:state": "Región de Los Lagos",
+    "addr:street": "San Juan",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "name": "Cassis Café",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "smoking": "no",
+    "source:addr": "www.sii.cl, Cartografía Digital SII Mapas",
+    "website": "https://linktr.ee/cassiscafe",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2687629681,
+  "lat": -45.5710157,
+  "lon": -72.0698279,
+  "tags": {
+    "addr:housenumber": "360",
+    "addr:street": "Dussen",
+    "amenity": "cafe",
+    "diet:vegan": "limited",
+    "diet:vegetarian": "limited",
+    "food": "yes",
+    "food:cake": "yes",
+    "name": "Querencia Cafeteria",
+    "opening_hours": "Mo-Fr 08:00-20:30; Sa 10:00-19:30",
+    "phone": "+672210050"
+  }
+},
+{
+  "type": "node",
+  "id": 3753838312,
+  "lat": -33.4370405,
+  "lon": -70.6381363,
+  "tags": {
+    "addr:housenumber": "158",
+    "addr:street": "Merced",
+    "amenity": "cafe",
+    "diet:vegan": "only",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Porta",
+    "opening_hours": "Mo-Su 08:00-21:00",
+    "outdoor_seating": "yes",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3997655646,
+  "lat": -34.4388105,
+  "lon": -71.0798235,
+  "tags": {
+    "addr:city": "San Vicente de Tagua Tagua",
+    "addr:housenumber": "1162",
+    "addr:street": "Germán Riesco",
+    "amenity": "restaurant",
+    "cuisine": "sushi",
+    "diet:meat": "yes",
+    "diet:non-vegetarian": "yes",
+    "diet:pescetarian": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Kiya Sushi & Burger",
+    "opening_hours": "Mo-Sa 12:00-21:00",
+    "opening_hours:covid19": "restricted"
+  }
+},
+{
+  "type": "node",
+  "id": 4030708916,
+  "lat": -33.0212713,
+  "lon": -71.5577224,
+  "tags": {
+    "addr:city": "Viña del Mar",
+    "addr:country": "CL",
+    "addr:door": "C",
+    "addr:housenumber": "191",
+    "addr:street": "1 Norte",
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Vegan Place"
+  }
+},
+{
+  "type": "node",
+  "id": 4048567186,
+  "lat": -33.4424845,
+  "lon": -70.6768268,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Verde que te quiero verde"
+  }
+},
+{
+  "type": "node",
+  "id": 4048567296,
+  "lat": -33.4389782,
+  "lon": -70.6684067,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "509",
+    "addr:street": "Avenida Ricardo Cumming",
+    "diet:vegan": "only",
+    "name": "Emporio Vegetal",
+    "opening_hours": "Mo-Sa 10:00-22:00",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4053158838,
+  "lat": -30.0342335,
+  "lon": -70.7119776,
+  "tags": {
+    "addr:housenumber": "234",
+    "addr:street": "Arturo Prat",
+    "amenity": "restaurant",
+    "description": "Cultural centre with vegetarian and vegan menus at lunchtime",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Jagannath Prashadam"
+  }
+},
+{
+  "type": "node",
+  "id": 4348042905,
+  "lat": -33.4228320,
+  "lon": -70.6124883,
+  "tags": {
+    "addr:housenumber": "054",
+    "addr:street": "Orrego Luco",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "El Huerto",
+    "name:en": "El Huerto",
+    "source": "Reconocimiento cortográfico de campo 2016 por KG",
+    "website": "https://www.elhuerto.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 4379472789,
+  "lat": -33.4418347,
+  "lon": -70.6555401,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Profesora Amanda Labarca",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;diner;local;breakfast;pasta;sandwich;tea",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "email": "despacho@brownrestaurante.cl",
+    "internet_access": "wlan",
+    "name": "Brown Tea & Soup",
+    "name:es": "Brown Tea & Soup",
+    "opening_hours": "Mo-Fr 07:30-22:00",
+    "phone": "+56226950764",
+    "website": "http://brownrestaurante.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 4436288495,
+  "lat": -33.4315981,
+  "lon": -70.6228646,
+  "tags": {
+    "addr:housenumber": "74",
+    "addr:street": "Huelén",
+    "amenity": "restaurant",
+    "capacity": "60",
+    "cuisine": "healthy_foofd",
+    "diet:vegan": "yes",
+    "name": "El Árbol Restaurant",
+    "name:en": "El Arbol Restorant",
+    "opening_hours": "Mo-We 09:00-20:30; Th,Fr 09:00-22:00; Sa 09:30-15:45",
+    "smoking": "outside",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4443727190,
+  "lat": -33.4418382,
+  "lon": -70.6484318,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "846",
+    "addr:street": "Moneda",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "El Naturista",
+    "source": "Reconocimiento cartográfico 2016 por KG."
+  }
+},
+{
+  "type": "node",
+  "id": 4453633170,
+  "lat": -33.4423162,
+  "lon": -70.6767026,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "3025",
+    "addr:street": "Huérfanos",
+    "amenity": "restaurant",
+    "contact:facebook": "Barelchanchoseis",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "El Chancho Seis",
+    "source": "Reconocimiento cortográfico de campo 2016 por KG",
+    "website": "http://elchanchoseis.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 4454179097,
+  "lat": -33.4523908,
+  "lon": -70.6633267,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "2017",
+    "addr:street": "Gorbea",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/prasadam.localvegetariano/",
+    "diet:vegan": "only",
+    "name": "Terra Sano",
+    "source": "Reconocimiento cartográfico 2016 por KG."
+  }
+},
+{
+  "type": "node",
+  "id": 4512901792,
+  "lat": -51.7255183,
+  "lon": -72.5092621,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Hablemos Coco",
+    "opening_hours": "Mo-Sa 10:00-16:00"
+  }
+},
+{
+  "type": "node",
+  "id": 4547232594,
+  "lat": -33.4381601,
+  "lon": -70.6421460,
+  "tags": {
+    "addr:housenumber": "361",
+    "addr:street": "Rosal",
+    "amenity": "cafe",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "name": "Wonderland Café",
+    "opening_hours": "Tu-Fr 08:00-21:00; Mo 08:00-15:00; Sa-Su 10:00-21:00",
+    "phone": "+56 9 4340 9729",
+    "website": "https://www.wonderlandcafe.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 4571903589,
+  "lat": -22.9120436,
+  "lon": -68.1996750,
+  "tags": {
+    "addr:city": "San Pedro de Atacama",
+    "addr:housenumber": "457",
+    "addr:street": "Toconao",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;pizza;crepe;breakfast;sandwich",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "name": "Roots",
+    "name:en": "Roots",
+    "opening_hours": "Mo-Su,PH 08:30-23:00"
+  }
+},
+{
+  "type": "node",
+  "id": 4587186950,
+  "lat": -33.4381297,
+  "lon": -70.6487444,
+  "tags": {
+    "addr:housenumber": "821",
+    "addr:street": "Merced",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Soju vegan restaurante",
+    "opening_hours": "Mo-Fr 09:00-22:00",
+    "website": "https://www.happycow.net/reviews/soju-vegan-and-vegetarian-restaurant-santiago-47131"
+  }
+},
+{
+  "type": "node",
+  "id": 4672301891,
+  "lat": -40.5607345,
+  "lon": -73.1067579,
+  "tags": {
+    "addr:housenumber": "parcela 4",
+    "addr:street": "Callejón Pilauco",
+    "cuisine": "regional;breakfast;cake;seafood;coffee_shop;pancake",
+    "diet:vegan": "yes",
+    "name": "Emporio aguas escarchadas",
+    "name:es": "Emporio aguas escarchadas",
+    "opening_hours": "Mo-Sa 09:00-21:00",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4749328921,
+  "lat": -34.4060378,
+  "lon": -72.0260271,
+  "tags": {
+    "addr:housenumber": "2241",
+    "addr:street": "Comercio",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/curcumapichilemu",
+    "contact:phone": "+56 9 9509 0670",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "name": "Cúrcuma",
+    "opening_hours": "Tu-Th 11:00-19:30; Fr-Sa 11:00-22:00; Mo 11:00-19:00; Su 11:00-21:00",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5314210158,
+  "lat": -33.4626385,
+  "lon": -70.5983873,
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "821",
+    "addr:street": "Avenida José Pedro Alessandri",
+    "amenity": "cafe",
+    "cuisine": "coffee;cake;ice_cream;juice",
+    "description": "Este café es \"Pet Friendly\".",
+    "diet:vegan": "yes",
+    "fixme": "Website isn't working: cromocafe.com - Is this place is still working?",
+    "name": "Cromo Café",
+    "opening_hours": "Mo-Fr 10:00-20:00; Tu off; Sa-Su 12:00-19:00",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5317126021,
+  "lat": -41.4785132,
+  "lon": -72.9570172,
+  "tags": {
+    "addr:city": "Puerto Montt",
+    "addr:country": "CL",
+    "addr:district": "Puerto Montt",
+    "addr:state": "Región de Los Lagos",
+    "addr:street": "Linares",
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "name": "back to the garden"
+  }
+},
+{
+  "type": "node",
+  "id": 5334057024,
+  "lat": -33.0193762,
+  "lon": -71.5590952,
+  "tags": {
+    "addr:city": "Viña del Mar",
+    "addr:housenumber": "60",
+    "addr:street": "3 Norte",
+    "addr:unit": "Local 6",
+    "amenity": "restaurant",
+    "cuisine": "peruvian;sandwich",
+    "diet:vegan": "yes",
+    "name": "Romeo sin Julieta",
+    "opening_hours": "Mo-Su 09:00-23:59",
+    "phone": "+56323428598"
+  }
+},
+{
+  "type": "node",
+  "id": 5339407621,
+  "lat": -33.4314060,
+  "lon": -70.6394732,
+  "tags": {
+    "addr:city": "Recoleta",
+    "addr:housenumber": "231",
+    "addr:street": "Bombero Núñez",
+    "amenity": "restaurant",
+    "cuisine": "burger;sandwich;regional;ice_cream;american;pizza",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "El Cerro",
+    "opening_hours": "Tu-We 13:00-22:00; Th-Sa 13:00-00:00; Su 13:30-21:00",
+    "phone": "+56 227380053"
+  }
+},
+{
+  "type": "node",
+  "id": 5388338516,
+  "lat": -33.0409701,
+  "lon": -71.6279760,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;fish;local",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "name": "Ñamburger"
+  }
+},
+{
+  "type": "node",
+  "id": 5393844021,
+  "lat": -41.3240440,
+  "lon": -72.9842870,
+  "tags": {
+    "addr:city": "Puerto Varas",
+    "addr:country": "CL",
+    "addr:district": "Puerto Varas",
+    "addr:housenumber": "301",
+    "addr:postcode": "5550000",
+    "addr:state": "Región de Los Lagos",
+    "addr:street": "Avenida Colón",
+    "amenity": "restaurant",
+    "cuisine": "oriental;burger;persian;asian;chinese;american",
+    "diet:vegan": "yes",
+    "email": "info@lentejaloca.com",
+    "name": "Lenteja Loca",
+    "opening_hours": "Tu-Su 11:00-21:00",
+    "phone": "+56940136955",
+    "website": "http://www.lentejaloca.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5584810121,
+  "lat": -39.2814352,
+  "lon": -72.2249479,
+  "tags": {
+    "addr:city": "Villarrica",
+    "addr:country": "CL",
+    "addr:district": "Villarrica",
+    "addr:housenumber": "365",
+    "addr:state": "Región de La Araucanía",
+    "addr:street": "Pedro Montt",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "diet:vegan": "yes",
+    "email": "charlys.coffee.cl@gmail.com",
+    "internet_access": "wlan",
+    "name": "Charly's Coffee",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "phone": "+56961339367"
+  }
+},
+{
+  "type": "node",
+  "id": 5584810122,
+  "lat": -33.4453069,
+  "lon": -70.6164385,
+  "tags": {
+    "addr:housenumber": "1157",
+    "addr:street": "José Luis Aguilar",
+    "amenity": "restaurant",
+    "cuisine": "international;coffee_shop",
+    "diet:vegan": "yes",
+    "email": "info@rawdical.cl",
+    "name": "Rawdical Kitchen",
+    "opening_hours": "Mo-Fr 10:00-17:00",
+    "phone": "+56998955626",
+    "website": "http://www.rawdical.cl"
+  }
+},
+{
+  "type": "node",
+  "id": 5622252899,
+  "lat": -38.6951191,
+  "lon": -72.6650961,
+  "tags": {
+    "addr:city": "Temuco",
+    "addr:country": "CL",
+    "addr:district": "Temuco",
+    "addr:milestone": "4.5",
+    "addr:state": "Región de La Araucanía",
+    "addr:street": "Temuco - Chol Chol",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/arboledaemaluisa/",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Arboleda Emaluisa",
+    "nohousenumber": "yes",
+    "opening_hours": "Sa-Su 13:00-19:30",
+    "outdoor_seating": "yes",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 5629374636,
+  "lat": -22.9115595,
+  "lon": -68.1994747,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "vegetariano y vegano",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Estrella Negra"
+  }
+},
+{
+  "type": "node",
+  "id": 5869242885,
+  "lat": -33.4461860,
+  "lon": -70.6169827,
+  "tags": {
+    "addr:housenumber": "1873",
+    "addr:street": "Avenida José Miguel Claro",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "email": "reservas@verdesazon.cl",
+    "name": "Verde sazón",
+    "opening_hours": "Mo-Sa 13:00-15:30,19:30-22:30",
+    "outdoor_seating": "yes",
+    "website": "https://verdesazon.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 5900148891,
+  "lat": -33.0478307,
+  "lon": -71.4449497,
+  "tags": {
+    "addr:city": "Quilpué",
+    "addr:country": "CL",
+    "addr:door": "Local 6",
+    "addr:housenumber": "549",
+    "addr:street": "Los Carrera",
+    "currency:CLP": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Emporio Clafira",
+    "opening_hours": "Mo-Fr 11:00-18:30, Sat 11:00-17:30",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "(32) 362 4529",
+    "shop": "health_food",
+    "website": "https://linktr.ee/emporioclafira",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6100067085,
+  "lat": -33.0468093,
+  "lon": -71.6211704,
+  "tags": {
+    "addr:city": "Valparaíso",
+    "addr:country": "CL",
+    "addr:housenumber": "560",
+    "addr:postcode": "2380035",
+    "addr:street": "Huito",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Vitamínica Porteña"
+  }
+},
+{
+  "type": "node",
+  "id": 6100067385,
+  "lat": -33.0468952,
+  "lon": -71.6245759,
+  "tags": {
+    "addr:housenumber": "169",
+    "addr:street": "Longfellow",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Betterraga Rebelde"
+  }
+},
+{
+  "type": "node",
+  "id": 6152448085,
+  "lat": -45.5698469,
+  "lon": -72.0692236,
+  "tags": {
+    "addr:city": "Coyhaique",
+    "addr:housenumber": "302",
+    "addr:street": "General Parra",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "brewery": "tropera",
+    "changing_table": "yes",
+    "cuisine": "burger",
+    "delivery": "yes",
+    "description": "Restaurante de hamburguesas",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "microbrewery": "yes",
+    "name": "Esquina Tropera",
+    "opening_hours": "Mo-Sa 12:00-23:59",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+569 3250 4693",
+    "stroller": "yes",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:wheelchair": "yes",
+    "website": "https://tropera.cl/restaurantes/la-esquina-tropera/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6154344885,
+  "lat": -27.1072483,
+  "lon": -70.8508084,
+  "tags": {
+    "addr:street": "Costanera Bahía Inglesa",
+    "amenity": "fast_food",
+    "cuisine": "coffee_shop;friture;french;ice_cream;pizza;sandwich;american;burger",
+    "diet:vegan": "yes",
+    "email": "contacto@onroute.cl",
+    "name": "On Route Food Truck",
+    "opening_hours": "Mo-Su 11:00-02:00",
+    "operator": "On Route Food Truck",
+    "website": "https://www.onroute.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 6193175085,
+  "lat": -27.3622981,
+  "lon": -70.3305692,
+  "tags": {
+    "addr:city": "Copiapó",
+    "addr:housenumber": "795",
+    "addr:postcode": "1530000",
+    "addr:street": "Maipú",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Coffee Room Vegan"
+  }
+},
+{
+  "type": "node",
+  "id": 6211705288,
+  "lat": -33.4476038,
+  "lon": -70.6232564,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Vegan Bunker"
+  }
+},
+{
+  "type": "node",
+  "id": 6216221686,
+  "lat": -33.4397884,
+  "lon": -70.6251712,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "sushi",
+    "diet:vegan": "yes",
+    "name": "Runaway Sushi Vegan",
+    "phone": "+56957067864"
+  }
+},
+{
+  "type": "node",
+  "id": 6253636096,
+  "lat": -39.8200860,
+  "lon": -73.2427960,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Enki",
+    "outdoor_seating": "yes",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397632,
+  "lat": -33.4493385,
+  "lon": -70.6248878,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:vegan": "only",
+    "name": "Lazy vegan"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397634,
+  "lat": -33.4456494,
+  "lon": -70.6249073,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Sapiens",
+    "takeaway": "yes",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397639,
+  "lat": -33.4369909,
+  "lon": -70.6408549,
+  "tags": {
+    "diet:vegan": "only",
+    "name": "Planta Maestra",
+    "organic": "yes",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397641,
+  "lat": -33.4369774,
+  "lon": -70.6407978,
+  "tags": {
+    "diet:vegan": "only",
+    "name": "Madhu",
+    "organic": "yes",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397642,
+  "lat": -33.4457953,
+  "lon": -70.6242409,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Arvoledo",
+    "outdoor_seating": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers"
+  }
+},
+{
+  "type": "node",
+  "id": 6325397646,
+  "lat": -33.4268501,
+  "lon": -70.6432030,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:vegan": "only",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Suculenta Sangucheria Vegana",
+    "takeaway": "yes",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6325817345,
+  "lat": -33.4738216,
+  "lon": -70.6390682,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:vegan": "only",
+    "name": "Vegan Soul",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6325817346,
+  "lat": -33.4742332,
+  "lon": -70.6410360,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "V-Rex"
+  }
+},
+{
+  "type": "node",
+  "id": 6325817347,
+  "lat": -33.4559621,
+  "lon": -70.6511243,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "VG Burger",
+    "toilets:access": "customers"
+  }
+},
+{
+  "type": "node",
+  "id": 6325817349,
+  "lat": -33.4739596,
+  "lon": -70.6407754,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;pizza",
+    "diet:vegan": "only",
+    "name": "Comida Go Vegan"
+  }
+},
+{
+  "type": "node",
+  "id": 6325817350,
+  "lat": -33.4399401,
+  "lon": -70.6659422,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Vegan Dealer"
+  }
+},
+{
+  "type": "node",
+  "id": 6340229031,
+  "lat": -36.8247467,
+  "lon": -73.0466988,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Vegan Store",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6385518062,
+  "lat": -34.5411131,
+  "lon": -71.2270644,
+  "tags": {
+    "addr:street": "Cruce Ruta H-800 - Fundo Millahue",
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "diet:gluten_free": "yes",
+    "diet:healthy": "yes",
+    "diet:lactose_free": "yes",
+    "diet:non-vegetarian": "yes",
+    "diet:organic": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "min_age": "18",
+    "name": "Pavilion",
+    "nohousenumber": "yes",
+    "website": "https://www.vikwine.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6758033261,
+  "lat": -33.4558642,
+  "lon": -70.5980606,
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "97",
+    "addr:street": "Avenida José Pedro Alessandri",
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:vegan": "yes",
+    "name": "Manatí",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 6806294844,
+  "lat": -33.4553896,
+  "lon": -70.5948224,
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:floor": "PB",
+    "addr:street": "Avenida Irarrázaval",
+    "amenity": "restaurant",
+    "check_date": "2025-07-05",
+    "cuisine": "italian",
+    "diet:gluten_free": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "level": "0",
+    "name": "La Finestra",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "smoking": "no",
+    "source": "survey 2019",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 7215360586,
+  "lat": -43.1833803,
+  "lon": -71.8655388,
+  "tags": {
+    "addr:city": "Futaleufú",
+    "addr:housenumber": "10",
+    "addr:street": "Manuel Rodríguez",
+    "amenity": "restaurant",
+    "cuisine": "burger;friture;sandwich",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "email": "cami.llanos21@gmail.com",
+    "internet_access": "wlan",
+    "name": "Madero",
+    "opening_hours": "Tu-Su 18:00-23:00",
+    "phone": "+56993282485"
+  }
+},
+{
+  "type": "node",
+  "id": 7253717179,
+  "lat": -34.1642930,
+  "lon": -70.7454047,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Breadgan Vegan Food"
+  }
+},
+{
+  "type": "node",
+  "id": 7272702186,
+  "lat": -23.6731645,
+  "lon": -70.4029980,
+  "tags": {
+    "addr:housenumber": "1095",
+    "addr:street": "Homero Ávila",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "name": "Hari dham",
+    "opening_hours": "Mo-Fr 13:00-16:30, 18:30-22:30; Sa-Su 13:00-16:00",
+    "phone": "+56 55 224 3900"
+  }
+},
+{
+  "type": "node",
+  "id": 7624229747,
+  "lat": -33.4200552,
+  "lon": -70.6082341,
+  "tags": {
+    "addr:city": "Providencia",
+    "addr:housenumber": "2312",
+    "addr:street": "General Holley",
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Ramen Ryoma Providencia",
+    "opening_hours": "Mo 12:30-17:00; Tu-Fr 12:30-16:30,17:30-19:00; Sa 12:30-17:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7932713585,
+  "lat": -18.4884017,
+  "lon": -70.2925529,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "internet_access": "wlan",
+    "name": "Eco centro Vrinda"
+  }
+},
+{
+  "type": "node",
+  "id": 8108722117,
+  "lat": -31.7846066,
+  "lon": -70.9897744,
+  "tags": {
+    "addr:city": "Salamanca",
+    "addr:housenumber": "Ruta D-825",
+    "addr:postcode": "1950000",
+    "addr:street": "Kilómetro 3 Camino a El Tambo",
+    "amenity": "restaurant",
+    "cuisine": "regional;international;sandwich",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Casa Campo Salamanca",
+    "opening_hours": "24/7",
+    "phone": "+56931288179"
+  }
+},
+{
+  "type": "node",
+  "id": 8580533367,
+  "lat": -38.7380326,
+  "lon": -72.6297811,
+  "tags": {
+    "addr:city": "Temuco",
+    "addr:country": "CL",
+    "addr:district": "Temuco",
+    "addr:housenumber": "01925",
+    "addr:state": "Región de La Araucanía",
+    "addr:street": "Avenida Pablo Neruda",
+    "amenity": "restaurant",
+    "cuisine": "sushi",
+    "delivery": "yes",
+    "diet:fish": "yes",
+    "diet:meat": "yes",
+    "diet:raw": "yes",
+    "diet:seafood": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "email": "hola@americansushi.cl",
+    "image": "https://www.americansushi.cl/cdn/shop/products/AmericanTuna3.jpg",
+    "name": "American Sushi",
+    "opening_hours": "Mo-Su 13:00-22:00",
+    "phone": "+56 9 7769 1789",
+    "source:addr": "www.sii.cl, Cartografía Digital SII Mapas",
+    "website": "https://www.americansushi.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 8613676288,
+  "lat": -33.4506932,
+  "lon": -70.6657760,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "2158",
+    "addr:street": "Sazié",
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "name": "Comida Vegana"
+  }
+},
+{
+  "type": "node",
+  "id": 8615144781,
+  "lat": -33.4507408,
+  "lon": -70.6659517,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "2180",
+    "addr:street": "Sazié",
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "name": "Abhay Charan"
+  }
+},
+{
+  "type": "node",
+  "id": 8620107146,
+  "lat": -33.4552374,
+  "lon": -70.6611251,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "664",
+    "addr:street": "Vergara",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Mister Sabor"
+  }
+},
+{
+  "type": "node",
+  "id": 8637067204,
+  "lat": -34.5388677,
+  "lon": -71.2348792,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "diet:healthy": "yes",
+    "diet:macrobiotic": "yes",
+    "diet:meat": "yes",
+    "diet:non-vegetarian": "yes",
+    "diet:organic": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Milla Milla"
+  }
+},
+{
+  "type": "node",
+  "id": 8858730117,
+  "lat": -33.4858477,
+  "lon": -70.6516023,
+  "tags": {
+    "addr:city": "San Miguel",
+    "addr:housenumber": "3519",
+    "addr:postcode": "8910339",
+    "addr:street": "Llano Subercaseaux",
+    "air_conditioning": "yes",
+    "branch": "El Llano",
+    "brand": "Jumbo",
+    "brand:wikidata": "Q6310864",
+    "changing_table": "no",
+    "check_date": "2024-07-10",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "no",
+    "level": "3",
+    "name": "Jumbo",
+    "opening_hours": "Mo-Sa 08:00-19:00; Su 09:00-19:00; PH 09:00-19:00",
+    "operator": "Cencosud",
+    "organic": "yes",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mach": "yes",
+    "payment:mastercard": "yes",
+    "payment:prepaid_cards": "yes",
+    "payment:visa": "yes",
+    "phone": "+56 600 400 3000",
+    "second_hand": "no",
+    "shop": "supermarket",
+    "source": "survey;local knowledge",
+    "stroller": "yes",
+    "toilets": "yes",
+    "toilets:menstrual_products": "no",
+    "toilets:wheelchair": "no",
+    "website": "https://www.jumbo.cl/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9143467879,
+  "lat": -29.9097090,
+  "lon": -71.2491047,
+  "tags": {
+    "addr:city": "La Serena",
+    "addr:housenumber": "690",
+    "addr:street": "Amunátegui",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Desde La Raiz Vegan",
+    "opening_hours": "Tu-Sa 12:00-19:00",
+    "phone": "+56948807450",
+    "website": "https://www.desdelaraiz.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 9701853047,
+  "lat": -23.6677951,
+  "lon": -70.4049340,
+  "tags": {
+    "addr:city": "Antofagasta",
+    "addr:housenumber": "745",
+    "addr:street": "Avenida Angamos",
+    "alt_name": "Dunkin' Donuts",
+    "amenity": "fast_food",
+    "brand": "Dunkin'",
+    "brand:wikidata": "Q847743",
+    "cuisine": "donut;coffee_shop",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Dunkin'",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9731535625,
+  "lat": -29.9054867,
+  "lon": -71.2457056,
+  "tags": {
+    "addr:city": "La Serena",
+    "addr:housenumber": "841",
+    "addr:street": "Lautaro",
+    "amenity": "restaurant",
+    "diet:gluten_free": "yes",
+    "diet:lactose_free": "yes",
+    "diet:organic": "yes",
+    "diet:raw": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Govinda's Restaurant",
+    "opening_hours": "Mo-Fr 12:00-15:00"
+  }
+},
+{
+  "type": "node",
+  "id": 9768685117,
+  "lat": -39.8125573,
+  "lon": -73.2458357,
+  "tags": {
+    "addr:city": "Valdivia",
+    "addr:housenumber": "374",
+    "addr:postcode": "5090000",
+    "addr:street": "O'Higgins",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "diet:vegan": "only",
+    "indoor_seating": "yes",
+    "name": "Enki Vegan",
+    "opening_hours": "Mo-We 13:00-12:30, Th-Sa 13:00-22:30",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+56936975889",
+    "was:website": "https://enkivegan.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 9859607669,
+  "lat": -33.4011744,
+  "lon": -70.7941171,
+  "tags": {
+    "addr:city": "Pudahuel",
+    "addr:housenumber": "2150",
+    "addr:street": "Jean Mermoz",
+    "amenity": "restaurant",
+    "diet:fruitarian": "yes",
+    "diet:healthy": "yes",
+    "diet:organic": "yes",
+    "diet:raw": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "level": "3",
+    "name": "Lulupok",
+    "operator": "Nuevo Pudahuel"
+  }
+},
+{
+  "type": "node",
+  "id": 9948032378,
+  "lat": -33.4425796,
+  "lon": -70.6338959,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "diet:vegan": "yes",
+    "name": "Fuente Rica Rica"
+  }
+},
+{
+  "type": "node",
+  "id": 10075105661,
+  "lat": -32.9377995,
+  "lon": -71.5456209,
+  "tags": {
+    "addr:city": "Concón",
+    "addr:housenumber": "4000",
+    "addr:street": "Camino Concón-Reñaca",
+    "diet:vegan": "yes",
+    "name": "Mora Loutit",
+    "shop": "bakery"
+  }
+},
+{
+  "type": "node",
+  "id": 10080796717,
+  "lat": -33.4385764,
+  "lon": -70.6412275,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "160",
+    "addr:street": "José Victorino Lastarria",
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Papachecos",
+    "opening_hours": "Mo-Sa 13:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10133284820,
+  "lat": -33.4528501,
+  "lon": -70.6236384,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "La Converseria"
+  }
+},
+{
+  "type": "node",
+  "id": 10133284822,
+  "lat": -29.9493429,
+  "lon": -71.2914849,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "diet:vegan": "yes",
+    "name": "Anasavam Vegano y Saludable"
+  }
+},
+{
+  "type": "node",
+  "id": 10133318018,
+  "lat": -33.4465627,
+  "lon": -70.6272154,
+  "tags": {
+    "addr:street": "Sta. Isabel 0306, Providencia",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Woh"
+  }
+},
+{
+  "type": "node",
+  "id": 10151880117,
+  "lat": -33.0417862,
+  "lon": -71.6283135,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Chicory",
+    "name:en": "Chicory"
+  }
+},
+{
+  "type": "node",
+  "id": 10160391544,
+  "lat": -23.6525869,
+  "lon": -70.4019471,
+  "tags": {
+    "addr:city": "Antofagasta",
+    "addr:housenumber": "559",
+    "addr:street": "Copiapó",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;regional;cake",
+    "diet:gluten_free": "yes",
+    "name": "Mercado sin Gluten"
+  }
+},
+{
+  "type": "node",
+  "id": 10592607450,
+  "lat": -33.0418516,
+  "lon": -71.6035310,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "sandwich",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Barón Garden",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10873965050,
+  "lat": -33.4860781,
+  "lon": -70.6514485,
+  "tags": {
+    "addr:housename": "Cenco El LLano",
+    "addr:housenumber": "3519",
+    "addr:street": "Llano Subercaseaux",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "bar": "no",
+    "branch": "El Llano",
+    "brand": "Dominó",
+    "brewery": "yes",
+    "capacity": "70",
+    "check_date": "2023-08-06",
+    "contact:facebook": "https://www.facebook.com/DominoFDS",
+    "contact:instagram": "https://www.instagram.com/dominofds",
+    "contact:twitter": "https://twitter.com/dominofds",
+    "cuisine": "sandwich;hot_dog;juice;salad;chicken;breakfast",
+    "delivery": "yes",
+    "diet:chicken": "yes",
+    "diet:healthy": "yes",
+    "diet:meat": "yes",
+    "diet:plant-based": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "highchair": "no",
+    "internet_access": "no",
+    "level": "2",
+    "microbrewery": "no",
+    "min_age": "18",
+    "name": "Dominó Fuente de Soda",
+    "operator": "Dominó",
+    "outdoor_seating": "no",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "reservation": "no",
+    "smoking": "no",
+    "source": "survey",
+    "takeaway": "yes",
+    "toilets": "no",
+    "toilets:wheelchair": "no",
+    "website": "https://domino.cl/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10913637202,
+  "lat": -34.1718298,
+  "lon": -70.7386758,
+  "tags": {
+    "addr:city": "Rancagua",
+    "addr:housenumber": "222",
+    "addr:street": "Oficial Carlos María O'Carrol",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Breadgan Vegan Food"
+  }
+},
+{
+  "type": "node",
+  "id": 10959576022,
+  "lat": -33.4150052,
+  "lon": -70.6042242,
+  "tags": {
+    "addr:housenumber": "2758",
+    "addr:street": "Vitacura",
+    "air_conditioning": "yes",
+    "amenity": "fast_food",
+    "branch": "Vitacura",
+    "brand": "Subway",
+    "brand:wikidata": "Q244457",
+    "capacity": "50",
+    "check_date": "2023-06-06",
+    "cuisine": "sandwich",
+    "delivery": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "drive_through": "no",
+    "highchair": "no",
+    "internet_access": "no",
+    "name": "Subway Vitacura",
+    "opening_hours": "08:30-21:00",
+    "outdoor_seating": "no",
+    "payment:american_express": "yes",
+    "payment:apple_pay": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:google_pay": "yes",
+    "payment:mastercard": "yes",
+    "payment:mastercard_contactless": "yes",
+    "payment:nfc": "yes",
+    "payment:prepaid_cards": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "smoking": "no",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10975949783,
+  "lat": -36.8230427,
+  "lon": -73.0417481,
+  "tags": {
+    "addr:city": "Concepcion",
+    "addr:housenumber": "1348",
+    "addr:postcode": "4030000",
+    "addr:street": "Barros Arana",
+    "amenity": "restaurant",
+    "cuisine": "sushi",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "email": "hola@quierowow.cl",
+    "name": "Wow! Sushi",
+    "opening_hours": "Mo-Su 11:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:cryptocurrencies": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+56412151656",
+    "website": "https://www.quierowow.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 11011262331,
+  "lat": -33.4896204,
+  "lon": -70.6616107,
+  "tags": {
+    "addr:housenumber": "1679",
+    "addr:street": "Avenida Presidente Salvador Allende Gossens",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "bar": "no",
+    "brewery": "no",
+    "capacity": "0",
+    "check_date": "2023-06-27",
+    "cuisine": "sushi",
+    "delivery": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "highchair": "no",
+    "internet_access": "no",
+    "microbrewery": "no",
+    "name": "Magick Sushi",
+    "opening_hours": "Mo-Th 17:00-22:30; Fr-Su 17:00-24:00",
+    "outdoor_seating": "no",
+    "payment:american_express": "yes",
+    "payment:apple_pay": "yes",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:mastercard_contactless": "yes",
+    "payment:transferencia": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "+56 9 7520 2252",
+    "reservation": "no",
+    "smoking": "no",
+    "source": "local knowledge;survey",
+    "takeaway": "yes",
+    "toilets": "no",
+    "toilets:wheelchair": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 11337151636,
+  "lat": -33.3651667,
+  "lon": -70.7213946,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Lo Cruzat",
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "name": "Vegan Delivery"
+  }
+},
+{
+  "type": "node",
+  "id": 11369616638,
+  "lat": -36.8269761,
+  "lon": -73.0404970,
+  "tags": {
+    "addr:city": "Concepción",
+    "addr:housenumber": "127",
+    "addr:place": "Plaza Perú",
+    "amenity": "fast_food",
+    "cuisine": "burger",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "drive_through": "no",
+    "name": "Kinwa",
+    "opening_hours": "Mo-Fr 11:00-20:00; Sa-Su 12:00-19:00",
+    "phone": "+56 9 7752 5268",
+    "website": "https://www.instagram.com/kinwachile/"
+  }
+},
+{
+  "type": "node",
+  "id": 11395140769,
+  "lat": -33.4278536,
+  "lon": -70.6600317,
+  "tags": {
+    "addr:housenumber": "1503",
+    "addr:street": "Presidente Aníbal Pinto",
+    "amenity": "fast_food",
+    "cuisine": "breakfast;local;tea",
+    "diet:vegan": "yes",
+    "name": "Pehuén",
+    "opening_hours": "Mo-Fr 09:00-18:00",
+    "phone": "+56 9 3262 5294",
+    "website": "https://productospehuen.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 11451113269,
+  "lat": -33.0288591,
+  "lon": -71.5435364,
+  "tags": {
+    "addr:street": "Simón Bolívar",
+    "amenity": "restaurant",
+    "cuisine": "american;burger;chicken;coffee_shop;friture;pizza;sandwich",
+    "delivery": "yes",
+    "diet:gluten_free": "no",
+    "diet:lactose_free": "limited",
+    "diet:vegan": "no",
+    "diet:vegetarian": "no",
+    "dog": "no",
+    "internet_access": "no",
+    "name": "Gazusa",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "organic": "no",
+    "service:electricity": "ask",
+    "smoking": "no",
+    "takeaway": "yes",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 11489411893,
+  "lat": -38.7408148,
+  "lon": -72.5990298,
+  "tags": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Britea",
+    "opening_hours": "Mo-Sa 12:00-22:00",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:debit_cards": "yes",
+    "payment:notes": "yes",
+    "toilets": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 11492116671,
+  "lat": -33.4139689,
+  "lon": -70.5828450,
+  "tags": {
+    "addr:city": "Las Condes",
+    "addr:housenumber": "4501",
+    "addr:street": "Avenida Apoquindo",
+    "amenity": "restaurant",
+    "check_date:currency:XBT": "2026-01-22",
+    "cuisine": "coffee_shop;salad;crepe",
+    "currency:XBT": "yes",
+    "diet:non-vegetarian": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Crepe Station",
+    "opening_hours": "Mo-Su 08:00-18:00",
+    "outdoor_seating": "yes",
+    "payment:lightning": "yes",
+    "payment:lightning_contactless": "no",
+    "payment:onchain": "no",
+    "phone": "+56222071921",
+    "survey:date": "2024-01-05"
+  }
+},
+{
+  "type": "node",
+  "id": 11631828304,
+  "lat": -39.4904332,
+  "lon": -72.1571665,
+  "tags": {
+    "amenity": "fast_food",
+    "diet:vegan": "yes",
+    "name": "El Ciprés a Granel"
+  }
+},
+{
+  "type": "node",
+  "id": 11737704464,
+  "lat": -33.0159789,
+  "lon": -71.5563201,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Daily Dish"
+  }
+},
+{
+  "type": "node",
+  "id": 11899835311,
+  "lat": -36.8273505,
+  "lon": -73.0398605,
+  "tags": {
+    "addr:city": "Concepción",
+    "addr:housenumber": "93",
+    "addr:street": "Avenida Paicaví",
+    "amenity": "fast_food",
+    "contact:facebook": "kinwachile",
+    "contact:instagram": "kinwachile",
+    "cuisine": "burger;salad;juice",
+    "diet:vegan": "yes",
+    "drive_through": "no",
+    "email": "kinwachile@gmail.com",
+    "name": "Kinwa",
+    "opening_hours": "Mo-Fr 11:00-20:00; Sa-Su 12:00-19:00",
+    "phone": "+56 977 525 268"
+  }
+},
+{
+  "type": "node",
+  "id": 11952620733,
+  "lat": -38.7519999,
+  "lon": -72.6422862,
+  "tags": {
+    "addr:city": "Temuco",
+    "addr:housenumber": "2814",
+    "addr:street": "Doña Enriqueta",
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "diet:dairy_free": "yes",
+    "diet:healthy": "yes",
+    "diet:lacto_vegetarian": "yes",
+    "diet:lactose_free": "yes",
+    "diet:meat": "yes",
+    "diet:non-vegetarian": "yes",
+    "diet:organic": "yes",
+    "diet:ovo_vegetarian": "yes",
+    "diet:pescetarian": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Nativafit",
+    "opening_hours": "Su-Fr 10:00-19:00",
+    "phone": "+56 9 9762 1321",
+    "takeaway": "yes",
+    "website": "https://www.nativafit.cl/"
+  }
+},
+{
+  "type": "node",
+  "id": 12038314612,
+  "lat": -29.9142523,
+  "lon": -71.2646251,
+  "tags": {
+    "addr:city": "La Serena",
+    "addr:housenumber": "1133",
+    "addr:street": "Cayetano Almeyda",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Anasavam"
+  }
+},
+{
+  "type": "node",
+  "id": 12040651685,
+  "lat": -33.0433224,
+  "lon": -71.6255097,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Almirante Montt",
+    "amenity": "restaurant",
+    "check_date": "2026-01-25",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "La Boca del Oso",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 12087887318,
+  "lat": -33.4448619,
+  "lon": -70.6679269,
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "78",
+    "addr:postcode": "8350598",
+    "addr:street": "Avenida Ricardo Cumming",
+    "amenity": "restaurant",
+    "brewery": "various",
+    "cuisine": "burger",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "min_age": "0",
+    "name": "Rocka Rolla's Restobar"
+  }
+},
+{
+  "type": "node",
+  "id": 12236312755,
+  "lat": -33.3970936,
+  "lon": -70.7964146,
+  "tags": {
+    "addr:city": "Pudahuel",
+    "addr:housenumber": "1704",
+    "addr:street": "Armando Cortínez Oriente",
+    "amenity": "lounge",
+    "cuisine": "breakfast;western;mediterranean;diner;coffee_shop;sandwich;salad",
+    "diet:healthy": "yes",
+    "diet:local": "yes",
+    "diet:meat": "yes",
+    "diet:mediterranean": "yes",
+    "diet:vegan": "yes",
+    "level": "2",
+    "name": "Salón VIP Pacific Club",
+    "website": "https://salonesvip.cl/salon-pacific-club-santiago-a08-y-a17"
+  }
+},
+{
+  "type": "node",
+  "id": 12249139841,
+  "lat": -45.5686599,
+  "lon": -72.0643333,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "name": "Casa Ciprés"
+  }
+},
+{
+  "type": "node",
+  "id": 12258148902,
+  "lat": -33.0433092,
+  "lon": -71.6258817,
+  "tags": {
+    "amenity": "pub",
+    "check_date": "2024-10-17",
+    "contact:instagram": "bardeltio_",
+    "diet:vegan": "yes",
+    "name": "Bar del Tío",
+    "opening_hours": "Tu-Fr 17:30-01:00,Sa 18:30-02:00",
+    "website:menu": "https://www.lacarte.cl/menu/159/bar-del-tio/?fbclid=PAZXh0bgNhZW0CMTEAAaZm1Y5fJqbWPdQWfs8Abg-34rpIp0sdx8aIcg-PY5s7wNcy_qLmeKBcy_8_aem_2CcBL4lS1BAu--DsmYhlRQ"
+  }
+},
+{
+  "type": "node",
+  "id": 12380999801,
+  "lat": -51.7309366,
+  "lon": -72.4985672,
+  "tags": {
+    "addr:housenumber": "754",
+    "addr:street": "Miraflores",
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "El Tejano Tacos",
+    "opening_hours": "Mo-Fr 17:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 12467569011,
+  "lat": -38.4751985,
+  "lon": -71.5491211,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "diet:gluten_free": "yes",
+    "diet:lactose_free": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Endemiko Restaurante",
+    "phone": "+56987332416",
+    "website": "https://www.endemiko.com/restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 12800720826,
+  "lat": -34.4375839,
+  "lon": -71.0766302,
+  "tags": {
+    "addr:city": "San Vicente de Tagua Tagua",
+    "addr:housenumber": "32",
+    "addr:street": "Hermanas Peña Donoso",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Vegannette"
+  }
+},
+{
+  "type": "node",
+  "id": 13117043059,
+  "lat": -33.5188288,
+  "lon": -70.5991510,
+  "tags": {
+    "addr:city": "La Florida",
+    "addr:country": "CL",
+    "addr:housename": "Mall Plaza Vespucio",
+    "addr:housenumber": "7110",
+    "addr:street": "Avenida Vicuña Mackenna Oriente",
+    "air_conditioning": "no",
+    "amenity": "cafe",
+    "diet:vegan": "only",
+    "diet:vegetarian": "only",
+    "name": "And Espresso",
+    "opening_hours": "Mo-Su,PH 10:00-20:30",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13271206207,
+  "lat": -47.2512782,
+  "lon": -72.5683484,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Francisco Bascur",
+    "contact:email": "ale.ulloa.b@gmail.com",
+    "contact:instagram": "kofkewe",
+    "craft": "bakery",
+    "diet:vegan": "yes",
+    "name": "kofkewe",
+    "opening_hours": "We-Fr 15:00-20:00",
+    "pastry": "yes",
+    "shop": "bakery"
+  }
+},
+{
+  "type": "node",
+  "id": 13289263921,
+  "lat": -33.4619073,
+  "lon": -70.5846346,
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "756",
+    "addr:street": "Alcalde Jorge Monckeberg",
+    "addr:unit": "2",
+    "amenity": "fast_food",
+    "cuisine": "hot_dog",
+    "diet:vegan": "yes",
+    "name": "Pulento Jack"
+  }
+},
+{
+  "type": "node",
+  "id": 13301774317,
+  "lat": -34.3945503,
+  "lon": -72.0062503,
+  "tags": {
+    "amenity": "fast_food",
+    "cuisine": "sandwich;burger;sausage",
+    "diet:meat": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Rústiko"
+  }
+},
+{
+  "type": "node",
+  "id": 13358176326,
+  "lat": -33.4534219,
+  "lon": -70.6176797,
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "2452",
+    "addr:street": "Avenida José Manuel Infante",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Kigo Vegan"
+  }
+},
+{
+  "type": "way",
+  "id": 172345454,
+  "center": {
+    "lat": -45.5756976,
+    "lon": -72.0722114
+  },
+  "tags": {
+    "addr:city": "Coyhaique",
+    "addr:housenumber": "331",
+    "addr:street": "Lautaro",
+    "air_conditioning": "yes",
+    "brand": "Unimarc",
+    "brand:wikidata": "Q6156244",
+    "building": "supermarket",
+    "building:levels": "3",
+    "building:levels:underground": "1",
+    "changing_table": "yes",
+    "currency:CLP": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Unimarc",
+    "opening_hours": "Mo-Su 08:30-21:30",
+    "operator": "Rendic Hermanos S.A.",
+    "organic": "yes",
+    "payment:cash": "yes",
+    "payment:cheque": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+566006000025",
+    "self_checkout": "yes",
+    "shop": "supermarket",
+    "smoking": "no",
+    "toilets": "yes",
+    "website": "https://www.unimarc.cl",
+    "wheelchair": "yes",
+    "wikidata": "Q6156244",
+    "wikipedia": "es:Unimarc"
+  }
+},
+{
+  "type": "way",
+  "id": 393517566,
+  "center": {
+    "lat": -45.5716551,
+    "lon": -72.0699901
+  },
+  "tags": {
+    "addr:city": "Coyhaique",
+    "addr:housenumber": "47-D",
+    "addr:street": "Paseo Horn",
+    "amenity": "restaurant",
+    "building": "commercial",
+    "cuisine": "pizza",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Mamma Gaucha",
+    "opening_hours": "mo-sa 12:00-02:00",
+    "website": "https://tropera.cl/restaurantes/mamma-gaucha/"
+  }
+},
+{
+  "type": "way",
+  "id": 413210467,
+  "center": {
+    "lat": -33.0477961,
+    "lon": -71.4452948
+  },
+  "tags": {
+    "addr:city": "Quilpué",
+    "addr:country": "CL",
+    "addr:housenumber": "895",
+    "addr:street": "Aníbal Pinto",
+    "amenity": "fast_food",
+    "building": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "name": "Empanadas Quilpué",
+    "operator": "José Julio Bustamante Cuevas",
+    "outdoor_seating": "no",
+    "smoking": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 593167080,
+  "center": {
+    "lat": -37.0274989,
+    "lon": -73.1400748
+  },
+  "tags": {
+    "addr:city": "Coronel",
+    "addr:housenumber": "3-43",
+    "addr:street": "Pasaje Las Palmeras",
+    "air_conditioning": "yes",
+    "brand": "Unimarc",
+    "brand:wikidata": "Q6156244",
+    "building": "yes",
+    "building:levels": "1",
+    "currency:CLP": "yes",
+    "diet:fish": "yes",
+    "diet:gluten_free": "yes",
+    "diet:lactose_free": "yes",
+    "diet:meat": "yes",
+    "diet:mediterranean": "yes",
+    "diet:omnivore": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "email": "contacto.unimarc@unimarc.cl",
+    "name": "Unimarc",
+    "opening_hours": "Mo-Sa 08:30-20:00, Su 9:00-17:00",
+    "operator": "unimarc",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+56 412714238",
+    "shop": "supermarket",
+    "stroller": "yes",
+    "website": "https://www.unimarc.cl/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 602726678,
+  "center": {
+    "lat": -39.8087433,
+    "lon": -73.2550172
+  },
+  "tags": {
+    "addr:city": "Valdivia",
+    "addr:housenumber": "91",
+    "addr:street": "Los Tilos",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "building": "house",
+    "cuisine": "sandwich;regional",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "La Última Frontera",
+    "start_date": "2025-01",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 725146199,
+  "center": {
+    "lat": -33.4565793,
+    "lon": -70.5955005
+  },
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "3400",
+    "addr:street": "Dublé Almeyda",
+    "amenity": "cafe",
+    "building": "house",
+    "building:levels": "1",
+    "diet:vegan": "yes",
+    "name": "CactusBerry Café",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 744339569,
+  "center": {
+    "lat": -39.8169484,
+    "lon": -73.2361238
+  },
+  "tags": {
+    "addr:city": "Valdivia",
+    "addr:country": "CL",
+    "addr:district": "Valdivia",
+    "addr:housenumber": "958",
+    "addr:state": "Región de Los Ríos",
+    "addr:street": "Arauco",
+    "amenity": "restaurant",
+    "building": "yes",
+    "cuisine": "pizza",
+    "diet:vegan": "yes",
+    "name": "Corazón Contento",
+    "phone": "+56977073626"
+  }
+},
+{
+  "type": "way",
+  "id": 1117712688,
+  "center": {
+    "lat": -33.4494418,
+    "lon": -70.5957133
+  },
+  "tags": {
+    "addr:city": "Ñuñoa",
+    "addr:housenumber": "3362",
+    "addr:street": "Avenida Holanda",
+    "amenity": "restaurant",
+    "building": "house",
+    "contact:instagram": "https://www.instagram.com/lafraternal/",
+    "diet:gluten_free": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "La Fraternal",
+    "opening_hours": "Mo-Fr 09:00-20:00; Sa-Su 09:00-18:00",
+    "website": "https://www.lafraternal.cl/"
+  }
+},
+{
+  "type": "way",
+  "id": 1151621193,
+  "center": {
+    "lat": -33.4464450,
+    "lon": -70.6661332
+  },
+  "tags": {
+    "addr:city": "Santiago",
+    "addr:housenumber": "13",
+    "addr:street": "Maturana",
+    "amenity": "restaurant",
+    "building": "yes",
+    "diet:vegan": "yes",
+    "name": "Diabla Katana"
+  }
+},
+{
+  "type": "way",
+  "id": 1184721363,
+  "center": {
+    "lat": -18.0120735,
+    "lon": -70.2512973
+  },
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Calle 28 de Julio",
+    "amenity": "restaurant",
+    "building": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "El buen lugar",
+    "opening_hours": "Mo-Su 12:00-16:00"
+  }
+},
+{
+  "type": "way",
+  "id": 1188810143,
+  "center": {
+    "lat": -28.4708680,
+    "lon": -71.2259628
+  },
+  "tags": {
+    "addr:city": "Huasco",
+    "addr:housenumber": "34",
+    "addr:postcode": "1640000",
+    "addr:street": "La Badera",
+    "amenity": "restaurant",
+    "building": "house",
+    "cuisine": "japanese;sushi;local",
+    "diet:local": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Cales Sushi",
+    "opening_hours": "Mo-Su 16:00-23:30",
+    "phone": "+569 9150 5493",
+    "website": "https://www.facebook.com/CalesSushi"
+  }
+},
+{
+  "type": "way",
+  "id": 1214913715,
+  "center": {
+    "lat": -27.3646785,
+    "lon": -70.3382315
+  },
+  "tags": {
+    "addr:city": "Copiapó",
+    "addr:housenumber": "276",
+    "addr:street": "Atacama",
+    "amenity": "cafe",
+    "building": "yes",
+    "cuisine": "regional",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Liberata Emporio",
+    "opening_hours": "10:00-20:00",
+    "outdoor_seating": "yes",
+    "phone": "+56976451516",
+    "website": "https://www.instagram.com/liberataemporio/"
+  }
+}
+
+  ]
+}

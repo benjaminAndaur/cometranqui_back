@@ -15,8 +15,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import cl.duoc.cometranqui.scraper.fuentes.FuenteOfertas;
 import cl.duoc.cometranqui.scraper.fuentes.Fuentes;
-import cl.duoc.cometranqui.scraper.kafka.KafkaPublicadorOfertas;
-import cl.duoc.cometranqui.scraper.kafka.PublicadorOfertas;
+import cl.duoc.cometranqui.scraper.kafka.KafkaPublicador;
+import cl.duoc.cometranqui.scraper.kafka.Publicador;
+import cl.duoc.cometranqui.scraper.locales.FuenteLocales;
+import cl.duoc.cometranqui.scraper.modelo.LocalDTO;
 import cl.duoc.cometranqui.scraper.modelo.OfertaDTO;
 
 /**
@@ -43,8 +45,9 @@ public class ScraperHandler implements RequestHandler<ScheduledEvent, String> {
     static String ejecutar(ScraperConfig config, boolean dryRun) {
         log.info("Configuración: {}", config);
         List<FuenteOfertas> fuentes = Fuentes.activas(config);
-        try (PublicadorOfertas publicador = dryRun ? new PublicadorConsola() : new KafkaPublicadorOfertas(config)) {
-            ScraperService.Resumen resumen = new ScraperService(fuentes, publicador).ejecutar();
+        List<FuenteLocales> locales = Fuentes.localesActivos(config);
+        try (Publicador publicador = dryRun ? new PublicadorConsola() : new KafkaPublicador(config)) {
+            ScraperService.Resumen resumen = new ScraperService(fuentes, locales, publicador).ejecutar();
             return JSON.writeValueAsString(resumen);
         } catch (Exception e) {
             throw new IllegalStateException("Fallo la ejecución del scraper", e);
@@ -56,14 +59,13 @@ public class ScraperHandler implements RequestHandler<ScheduledEvent, String> {
         System.out.println(ejecutar(ScraperConfig.desdeEntorno(), dryRun));
     }
 
-    /** Publicador para --dry-run: imprime cada oferta como una línea JSON. */
-    private static final class PublicadorConsola implements PublicadorOfertas {
+    /** Publicador para --dry-run: imprime cada oferta y local como una línea JSON. */
+    private static final class PublicadorConsola implements Publicador {
         private int total;
 
-        @Override
-        public void publicar(OfertaDTO oferta) {
+        private void publicar(Object valor) {
             try {
-                System.out.println(JSON.writeValueAsString(oferta));
+                System.out.println(JSON.writeValueAsString(valor));
                 total++;
             } catch (Exception e) {
                 throw new IllegalStateException(e);
@@ -71,8 +73,18 @@ public class ScraperHandler implements RequestHandler<ScheduledEvent, String> {
         }
 
         @Override
+        public void publicar(LocalDTO local) {
+            publicar((Object) local);
+        }
+
+        @Override
+        public void publicar(OfertaDTO oferta) {
+            publicar((Object) oferta);
+        }
+
+        @Override
         public int flush() {
-            log.info("dry-run: {} ofertas impresas", total);
+            log.info("dry-run: {} mensajes impresos", total);
             return 0;
         }
 

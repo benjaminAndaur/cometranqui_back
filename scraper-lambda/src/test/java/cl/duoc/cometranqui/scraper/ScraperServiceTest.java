@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import cl.duoc.cometranqui.scraper.fuentes.FuenteMock;
 import cl.duoc.cometranqui.scraper.fuentes.FuenteOfertas;
-import cl.duoc.cometranqui.scraper.kafka.PublicadorOfertas;
+import cl.duoc.cometranqui.scraper.kafka.Publicador;
+import cl.duoc.cometranqui.scraper.modelo.LocalDTO;
 import cl.duoc.cometranqui.scraper.modelo.OfertaDTO;
 import cl.duoc.cometranqui.scraper.modelo.Restriccion;
 
@@ -55,12 +56,16 @@ class ScraperServiceTest {
                 .containsExactlyInAnyOrder(Restriccion.VEGANO, Restriccion.APLV, Restriccion.SIN_LACTOSA);
     }
 
-    private static final class PublicadorEnMemoria implements PublicadorOfertas {
+    private static final class PublicadorEnMemoria implements Publicador {
         final List<OfertaDTO> publicadas = new ArrayList<>();
 
         @Override
         public void publicar(OfertaDTO oferta) {
             publicadas.add(oferta);
+        }
+
+        @Override
+        public void publicar(LocalDTO local) {
         }
 
         @Override

@@ -16,25 +16,31 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import cl.duoc.cometranqui.scraper.ScraperConfig;
+import cl.duoc.cometranqui.scraper.modelo.LocalDTO;
 import cl.duoc.cometranqui.scraper.modelo.OfertaDTO;
 
 /**
- * Productor Kafka: key = supermercado (todas las ofertas de una tienda caen en la misma partición y se procesan
- * en orden), value = OfertaDTO en JSON. {@code acks=all} + idempotencia evitan pérdidas y duplicados por reintento.
+ * Productor Kafka. {@code acks=all} + idempotencia evitan pérdidas y duplicados por reintento.
+ * <ul>
+ *   <li>Ofertas: key = supermercado (las ofertas de una tienda van a la misma partición y se procesan en orden).</li>
+ *   <li>Locales: key = id del local; el topic es compactado y Kafka conserva solo el último estado de cada local.</li>
+ * </ul>
  */
-public class KafkaPublicadorOfertas implements PublicadorOfertas {
+public class KafkaPublicador implements Publicador {
 
-    private static final Logger log = LoggerFactory.getLogger(KafkaPublicadorOfertas.class);
+    private static final Logger log = LoggerFactory.getLogger(KafkaPublicador.class);
 
     private final KafkaProducer<String, String> producer;
-    private final String topic;
+    private final String topicOfertas;
+    private final String topicLocales;
     private final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     private final AtomicInteger fallidos = new AtomicInteger();
 
-    public KafkaPublicadorOfertas(ScraperConfig config) {
-        this.topic = config.topic();
+    public KafkaPublicador(ScraperConfig config) {
+        this.topicOfertas = config.topic();
+        this.topicLocales = config.topicLocales();
         this.producer = new KafkaProducer<>(propiedades(config), new StringSerializer(), new StringSerializer());
     }
 
@@ -58,16 +64,25 @@ public class KafkaPublicadorOfertas implements PublicadorOfertas {
 
     @Override
     public void publicar(OfertaDTO oferta) {
+        enviar(topicOfertas, oferta.supermercado(), oferta, oferta.clave());
+    }
+
+    @Override
+    public void publicar(LocalDTO local) {
+        enviar(topicLocales, local.id(), local, local.id());
+    }
+
+    private void enviar(String topic, String key, Object valor, String descripcion) {
         String json;
         try {
-            json = mapper.writeValueAsString(oferta);
+            json = mapper.writeValueAsString(valor);
         } catch (JsonProcessingException e) {
-            throw new IllegalStateException("No se pudo serializar la oferta " + oferta.clave(), e);
+            throw new IllegalStateException("No se pudo serializar " + descripcion, e);
         }
-        producer.send(new ProducerRecord<>(topic, oferta.supermercado(), json), (metadata, error) -> {
+        producer.send(new ProducerRecord<>(topic, key, json), (metadata, error) -> {
             if (error != null) {
                 fallidos.incrementAndGet();
-                log.error("Fallo al publicar {}: {}", oferta.clave(), error.getMessage());
+                log.error("Fallo al publicar {} en {}: {}", descripcion, topic, error.getMessage());
             }
         });
     }
