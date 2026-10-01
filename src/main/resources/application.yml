@@ -10,7 +10,58 @@ spring:
         jwt:
           issuer-uri: ${COGNITO_ISSUER_URI}
 
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cometranqui}
+    username: ${DB_USER:cometranqui}
+    password: ${DB_PASS:cometranqui}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    properties:
+      # Local y EC2 usan SASL_PLAINTEXT + SCRAM-SHA-512. Para Testcontainers se sobrescribe a PLAINTEXT.
+      security.protocol: ${KAFKA_SECURITY_PROTOCOL:SASL_PLAINTEXT}
+      sasl.mechanism: SCRAM-SHA-512
+      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="${KAFKA_USER:}" password="${KAFKA_PASS:}";
+    consumer:
+      group-id: cometranqui-api-ofertas
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: cl.duoc.cometranqui.ofertas.kafka.OfertaMensaje
+        spring.json.use.type.headers: false
+    producer:
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      ack-mode: manual_immediate
+      concurrency: 3
+
 app:
   security:
     cognito-client-id: ${COGNITO_CLIENT_ID}
     allowed-origin: ${FRONTEND_ORIGIN:http://localhost:3000}
+  kafka:
+    topic-ofertas: ofertas.scrapeadas
+    topic-dlt: ofertas.dlt
+    topic-alertas: ofertas.alertas
+    reintentos: 3
+    backoff-ms: 1000
+  ofertas:
+    # Porcentaje de baja de precio que dispara un mensaje en ofertas.alertas
+    umbral-alerta-pct: 20
+    # Ofertas no vistas por el scraper en este plazo dejan de mostrarse
+    max-antiguedad-horas: 48
+  scraper:
+    lambda-name: ${SCRAPER_LAMBDA_NAME:cometranqui-scraper}
+    region: ${AWS_REGION:us-east-1}
