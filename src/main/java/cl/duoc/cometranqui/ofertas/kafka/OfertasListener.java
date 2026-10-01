@@ -33,7 +33,8 @@ public class OfertasListener {
         this.validator = validator;
     }
 
-    @KafkaListener(id = "ofertas-listener", topics = "${app.kafka.topic-ofertas}")
+    // idIsGroup=false: si no, el id del listener reemplazaría al group-id configurado
+    @KafkaListener(id = "ofertas-listener", idIsGroup = false, topics = "${app.kafka.topic-ofertas}")
     public void onOferta(ConsumerRecord<String, OfertaMensaje> registro, Acknowledgment ack) {
         OfertaMensaje mensaje = registro.value();
         Set<ConstraintViolation<OfertaMensaje>> errores = validator.validate(mensaje);
