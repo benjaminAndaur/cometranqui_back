@@ -68,13 +68,19 @@ abstract class FuenteCatalogo implements FuenteOfertas {
     private synchronized List<ProductoListado> catalogo() throws IOException {
         if (catalogo == null) {
             List<ProductoListado> todos = new ArrayList<>();
-            for (int pagina = 1; pagina <= maxPaginas; pagina++) {
-                var cuerpo = http.get(urlPagina(pagina));
-                List<ProductoListado> productos = cuerpo.isPresent() ? parsear(cuerpo.get()) : List.of();
-                if (productos.isEmpty()) {
-                    break;
+            try {
+                for (int pagina = 1; pagina <= maxPaginas; pagina++) {
+                    var cuerpo = http.get(urlPagina(pagina));
+                    List<ProductoListado> productos = cuerpo.isPresent() ? parsear(cuerpo.get()) : List.of();
+                    if (productos.isEmpty()) {
+                        break;
+                    }
+                    todos.addAll(productos);
                 }
-                todos.addAll(productos);
+            } catch (IOException e) {
+                // Se reporta una vez; las demás restricciones de esta ejecución no vuelven a intentar
+                catalogo = List.of();
+                throw e;
             }
             log.info("{}: catálogo de {} productos", nombre(), todos.size());
             catalogo = todos;
