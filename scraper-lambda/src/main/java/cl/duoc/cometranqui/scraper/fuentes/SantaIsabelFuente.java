@@ -38,6 +38,11 @@ public class SantaIsabelFuente extends FuenteBusquedaPaginada {
     }
 
     @Override
+    public String nombreVisible() {
+        return "Santa Isabel";
+    }
+
+    @Override
     String urlBusqueda(String terminoCodificado, int pagina) {
         return BASE + "/busca?ft=" + terminoCodificado + (pagina > 1 ? "&page=" + pagina : "");
     }
@@ -65,7 +70,8 @@ public class SantaIsabelFuente extends FuenteBusquedaPaginada {
                     oferta.path("ListPrice").asInt(),
                     oferta.path("AvailableQuantity").asInt(0) > 0,
                     BASE + "/" + p.path("linkText").asText() + "/p",
-                    item.path("images").path(0).path("imageUrl").asText(null)));
+                    item.path("images").path(0).path("imageUrl").asText(null),
+                    null));
         }
         return productos;
     }

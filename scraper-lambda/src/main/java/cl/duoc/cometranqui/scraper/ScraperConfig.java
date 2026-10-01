@@ -11,7 +11,8 @@ import java.util.Map;
  *   <li>KAFKA_BOOTSTRAP: host:puerto del broker (local: localhost:9092)</li>
  *   <li>KAFKA_USER / KAFKA_PASS: credenciales SASL/SCRAM-SHA-512. Sin usuario se conecta en PLAINTEXT.</li>
  *   <li>KAFKA_TOPIC: topic destino (por defecto ofertas.scrapeadas)</li>
- *   <li>FUENTES_ACTIVAS: JUMBO,SANTA_ISABEL,MOCK (separadas por coma)</li>
+ *   <li>FUENTES_ACTIVAS: códigos separados por coma (JUMBO, UNIMARC, DAORO, MOCK...) o los grupos
+ *       SUPERMERCADOS, TIENDAS, TODAS (por defecto)</li>
  *   <li>SCRAPER_MAX_PAGINAS: páginas por búsqueda (1-5, por defecto 3)</li>
  *   <li>SCRAPER_PAUSA_MS: pausa entre requests (por defecto 1500)</li>
  *   <li>MOCK_BAJA_PRECIO: true para que FuenteMock simule bajas de precio (demo de ofertas.alertas)</li>
@@ -37,7 +38,7 @@ public record ScraperConfig(
                 env.getOrDefault("KAFKA_USER", ""),
                 env.getOrDefault("KAFKA_PASS", ""),
                 env.getOrDefault("KAFKA_TOPIC", "ofertas.scrapeadas"),
-                Arrays.stream(env.getOrDefault("FUENTES_ACTIVAS", "JUMBO,SANTA_ISABEL").split(","))
+                Arrays.stream(env.getOrDefault("FUENTES_ACTIVAS", "TODAS").split(","))
                         .map(String::trim).filter(s -> !s.isEmpty()).toList(),
                 Math.max(1, Math.min(5, Integer.parseInt(env.getOrDefault("SCRAPER_MAX_PAGINAS", "3")))),
                 Long.parseLong(env.getOrDefault("SCRAPER_PAUSA_MS", "1500")),

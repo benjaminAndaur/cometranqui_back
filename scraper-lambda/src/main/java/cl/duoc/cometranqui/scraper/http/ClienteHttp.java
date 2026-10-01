@@ -12,7 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Cliente HTTP "educado": User-Agent identificable, timeout de 10 s, pausa entre requests y respeto de robots.txt.
+ * Cliente HTTP "educado": User-Agent identificable, timeout de 10 s, pausa mínima entre requests al mismo host
+ * y respeto de robots.txt. Es seguro usarlo desde varios hilos (una fuente por hilo).
  */
 public class ClienteHttp {
 
@@ -22,25 +23,36 @@ public class ClienteHttp {
 
     private final long pausaMs;
     private final Map<String, RobotsTxt> robotsPorHost = new ConcurrentHashMap<>();
-    private long ultimoRequest;
+    private final Map<String, Object> candadoPorHost = new ConcurrentHashMap<>();
+    private final Map<String, Long> ultimoRequestPorHost = new ConcurrentHashMap<>();
 
     public ClienteHttp(long pausaMs) {
         this.pausaMs = pausaMs;
     }
 
     /**
-     * GET de una página. Devuelve vacío si el sitio responde 404 (en VTEX significa "búsqueda sin resultados").
+     * GET de una página o JSON. Devuelve vacío si el sitio responde 404 (en VTEX significa "búsqueda sin resultados").
      *
      * @throws BloqueadoPorRobotsException si robots.txt no permite la URL
      * @throws IOException ante errores de red o códigos distintos de 2xx/404 (ej. 403 por bloqueo anti-bot)
      */
     public Optional<String> get(String url) throws IOException {
+        return ejecutarPermitido(url, Connection.Method.GET, null, Map.of());
+    }
+
+    /** POST con cuerpo JSON (APIs de búsqueda que usa el propio sitio, ej. Unimarc). */
+    public Optional<String> postJson(String url, String json, Map<String, String> headers) throws IOException {
+        return ejecutarPermitido(url, Connection.Method.POST, json, headers);
+    }
+
+    private Optional<String> ejecutarPermitido(String url, Connection.Method metodo, String cuerpo,
+                                               Map<String, String> headers) throws IOException {
         URI uri = URI.create(url);
         String rutaYQuery = uri.getRawPath() + (uri.getRawQuery() == null ? "" : "?" + uri.getRawQuery());
         if (!robots(uri).permite(rutaYQuery)) {
             throw new BloqueadoPorRobotsException(url);
         }
-        Connection.Response respuesta = ejecutar(url);
+        Connection.Response respuesta = ejecutar(url, metodo, cuerpo, headers);
         if (respuesta.statusCode() == 404) {
             return Optional.empty();
         }
@@ -53,7 +65,7 @@ public class ClienteHttp {
     private RobotsTxt robots(URI uri) {
         return robotsPorHost.computeIfAbsent(uri.getScheme() + "://" + uri.getHost(), base -> {
             try {
-                Connection.Response r = ejecutar(base + "/robots.txt");
+                Connection.Response r = ejecutar(base + "/robots.txt", Connection.Method.GET, null, Map.of());
                 return r.statusCode() == 200 ? RobotsTxt.parsear(r.body(), USER_AGENT) : RobotsTxt.permitirTodo();
             } catch (IOException e) {
                 log.warn("No se pudo leer robots.txt de {}: {}", base, e.getMessage());
@@ -62,24 +74,33 @@ public class ClienteHttp {
         });
     }
 
-    private synchronized Connection.Response ejecutar(String url) throws IOException {
-        pausar();
-        log.info("GET {}", url);
-        try {
-            return Jsoup.connect(url)
-                    .userAgent(USER_AGENT)
-                    .timeout(TIMEOUT_MS)
-                    .maxBodySize(0)
-                    .ignoreContentType(true)
-                    .ignoreHttpErrors(true)
-                    .execute();
-        } finally {
-            ultimoRequest = System.currentTimeMillis();
+    private Connection.Response ejecutar(String url, Connection.Method metodo, String cuerpo,
+                                         Map<String, String> headers) throws IOException {
+        String host = URI.create(url).getHost();
+        synchronized (candadoPorHost.computeIfAbsent(host, h -> new Object())) {
+            pausar(host);
+            log.info("{} {}", metodo, url);
+            try {
+                Connection conexion = Jsoup.connect(url)
+                        .method(metodo)
+                        .userAgent(USER_AGENT)
+                        .timeout(TIMEOUT_MS)
+                        .maxBodySize(0)
+                        .ignoreContentType(true)
+                        .ignoreHttpErrors(true)
+                        .headers(headers);
+                if (cuerpo != null) {
+                    conexion.header("Content-Type", "application/json").requestBody(cuerpo);
+                }
+                return conexion.execute();
+            } finally {
+                ultimoRequestPorHost.put(host, System.currentTimeMillis());
+            }
         }
     }
 
-    private void pausar() {
-        long espera = ultimoRequest + pausaMs - System.currentTimeMillis();
+    private void pausar(String host) {
+        long espera = ultimoRequestPorHost.getOrDefault(host, 0L) + pausaMs - System.currentTimeMillis();
         if (espera > 0) {
             try {
                 Thread.sleep(espera);

@@ -45,6 +45,11 @@ public class JumboFuente extends FuenteBusquedaPaginada {
     }
 
     @Override
+    public String nombreVisible() {
+        return "Jumbo";
+    }
+
+    @Override
     String urlBusqueda(String terminoCodificado, int pagina) {
         return BASE + "/busqueda?ft=" + terminoCodificado + (pagina > 1 ? "&page=" + pagina : "");
     }
@@ -77,7 +82,8 @@ public class JumboFuente extends FuenteBusquedaPaginada {
                     item.path("listPrice").asInt(),
                     item.path("stock").asBoolean(true),
                     BASE + "/" + producto.path("slug").asText() + "/p",
-                    item.path("images").path(0).asText(null)));
+                    item.path("images").path(0).asText(null),
+                    null));
         }
         return new ArrayList<>(productos.values());
     }

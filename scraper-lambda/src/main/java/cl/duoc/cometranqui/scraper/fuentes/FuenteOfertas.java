@@ -15,6 +15,9 @@ public interface FuenteOfertas {
     /** Código de la fuente, usado en FUENTES_ACTIVAS (ej. JUMBO). */
     String nombre();
 
+    /** Nombre de la tienda para mostrar en la web (ej. "Santa Isabel"). */
+    String nombreVisible();
+
     /** Ofertas vigentes aptas para la restricción indicada. */
     List<OfertaDTO> obtener(Restriccion restriccion) throws IOException;
 }

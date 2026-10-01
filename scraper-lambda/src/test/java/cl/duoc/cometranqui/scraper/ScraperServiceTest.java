@@ -25,6 +25,11 @@ class ScraperServiceTest {
             }
 
             @Override
+            public String nombreVisible() {
+                return "Rota";
+            }
+
+            @Override
             public List<OfertaDTO> obtener(Restriccion r) throws IOException {
                 throw new IOException("HTTP 403");
             }

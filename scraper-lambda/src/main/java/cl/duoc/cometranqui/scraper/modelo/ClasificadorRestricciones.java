@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public final class ClasificadorRestricciones {
 
     private static final Pattern SIN_GLUTEN = Pattern.compile(
-            "\\b(sin|libre de|s/)\\s*gluten\\b|\\bgluten\\s*free\\b|\\bapto\\s+celiac");
+            "\\b(sin|libre de|s/|no\\s*(\\+|mas))\\s*gluten\\b|\\bgluten\\s*free\\b|\\bapto\\s+celiac");
     private static final Pattern SIN_LACTOSA = Pattern.compile(
             "\\b(sin|libre de|0\\s*%)\\s*(gluten\\s+(y|ni)\\s+)?lactosa\\b|\\bdeslactosad[oa]s?\\b|\\blactose\\s*free\\b");
     private static final Pattern VEGANO = Pattern.compile(

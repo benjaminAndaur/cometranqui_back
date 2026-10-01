@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import cl.duoc.cometranqui.scraper.modelo.OfertaDTO;
 import cl.duoc.cometranqui.scraper.modelo.Restriccion;
@@ -55,9 +56,17 @@ public class FuenteMock implements FuenteOfertas {
         this.bajaPrecio = bajaPrecio;
     }
 
+    private static final Map<String, String> NOMBRES = Map.of(
+            "JUMBO", "Jumbo", "SANTA_ISABEL", "Santa Isabel", "LIDER", "Líder", "UNIMARC", "Unimarc", "TOTTUS", "Tottus");
+
     @Override
     public String nombre() {
         return "MOCK";
+    }
+
+    @Override
+    public String nombreVisible() {
+        return "Datos de demostración";
     }
 
     @Override
@@ -68,7 +77,7 @@ public class FuenteMock implements FuenteOfertas {
                 .filter(b -> b.restricciones().contains(restriccion))
                 .map(b -> {
                     int oferta = bajaPrecio && CATALOGO.indexOf(b) < 3 ? (int) Math.round(b.oferta() * 0.75) : b.oferta();
-                    return new OfertaDTO(b.supermercado(), b.sku(), b.nombre(), b.marca(), b.categoria(),
+                    return new OfertaDTO(b.supermercado(), NOMBRES.get(b.supermercado()), b.sku(), b.nombre(), b.marca(), b.categoria(),
                             EnumSet.copyOf(b.restricciones()), b.normal(), oferta,
                             OfertaDTO.calcularDescuento(b.normal(), oferta),
                             "https://example.com/demo/" + b.slug(), null, vigencia, ahora);

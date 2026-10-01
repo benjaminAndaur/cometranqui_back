@@ -39,6 +39,15 @@ abstract class FuenteBusquedaPaginada implements FuenteOfertas {
     /** URL de la página {@code pagina} (base 1) de resultados para {@code termino} ya codificado. */
     abstract String urlBusqueda(String terminoCodificado, int pagina);
 
+    /** Descarga una página de resultados. Por defecto GET a {@link #urlBusqueda}; vacío = sin resultados. */
+    Optional<String> descargar(String termino, String terminoCodificado, int pagina) throws IOException {
+        return http.get(urlBusqueda(terminoCodificado, pagina));
+    }
+
+    ClienteHttp http() {
+        return http;
+    }
+
     /** Extrae los productos del HTML de una página de resultados. */
     abstract List<ProductoListado> parsear(String html) throws IOException;
 
@@ -50,7 +59,7 @@ abstract class FuenteBusquedaPaginada implements FuenteOfertas {
         for (String termino : restriccion.terminosBusqueda()) {
             String codificado = URLEncoder.encode(termino, StandardCharsets.UTF_8).replace("+", "%20");
             for (int pagina = 1; pagina <= maxPaginas; pagina++) {
-                Optional<String> html = http.get(urlBusqueda(codificado, pagina));
+                Optional<String> html = descargar(termino, codificado, pagina);
                 if (html.isEmpty()) {
                     break;
                 }
@@ -61,7 +70,7 @@ abstract class FuenteBusquedaPaginada implements FuenteOfertas {
                         continue;
                     }
                     nuevos++;
-                    p.aOferta(nombre(), clasificador, ahora)
+                    p.aOferta(nombre(), nombreVisible(), clasificador, ahora)
                             .filter(o -> o.restricciones().contains(restriccion))
                             .ifPresent(ofertas::add);
                 }

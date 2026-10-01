@@ -84,10 +84,60 @@ class ParsersTest {
         assertThat(new SantaIsabelFuente(null, clasificador, 1).parsear(html)).isEmpty();
     }
 
+    @Test
+    void unimarcExtraePreciosDesdeTextoYDetectaOfertas() throws IOException {
+        UnimarcFuente fuente = new UnimarcFuente(null, clasificador, 1);
+        List<ProductoListado> productos = fuente.parsear(fixture("unimarc-search-sin-lactosa.json"));
+
+        assertThat(productos).hasSize(40).allSatisfy(p -> {
+            assertThat(p.precio()).isPositive();
+            assertThat(p.url()).startsWith("https://www.unimarc.cl/product/").doesNotEndWith("/p");
+        });
+        List<OfertaDTO> ofertas = productos.stream()
+                .map(p -> p.aOferta(fuente.nombre(), fuente.nombreVisible(), clasificador, Instant.now()))
+                .flatMap(java.util.Optional::stream).toList();
+        assertThat(ofertas).isNotEmpty()
+                .allSatisfy(o -> assertThat(o.supermercadoNombre()).isEqualTo("Unimarc"))
+                .anySatisfy(o -> assertThat(o.restricciones()).contains(Restriccion.SIN_LACTOSA));
+        assertThat(UnimarcFuente.pesos("$11.990")).isEqualTo(11990);
+    }
+
+    @Test
+    void shopifyUsaTagsComoEvidencia() throws IOException {
+        ShopifyFuente fuente = new ShopifyFuente(
+                new FuenteCatalogo.Tienda("DAORO", "Da'Oro", "https://daoro.cl", null), null, clasificador, 1);
+        List<ProductoListado> productos = fuente.parsear(fixture("shopify-daoro-products.json"));
+
+        // 60 en el JSON, pero los agotados (sin variante disponible) se descartan
+        assertThat(productos).hasSizeBetween(1, 59);
+        assertThat(productos).allSatisfy(p -> assertThat(p.url()).startsWith("https://daoro.cl/products/"));
+        List<OfertaDTO> ofertas = productos.stream()
+                .map(p -> p.aOferta("DAORO", "Da'Oro", clasificador, Instant.now()))
+                .flatMap(java.util.Optional::stream).toList();
+        assertThat(ofertas).isNotEmpty()
+                .anySatisfy(o -> assertThat(o.restricciones()).contains(Restriccion.VEGANO));
+    }
+
+    @Test
+    void wooCommerceDecodificaEntidadesYAplicaRubroDeTienda() throws IOException {
+        WooCommerceFuente fuente = new WooCommerceFuente(
+                new FuenteCatalogo.Tienda("THIS_IS_VEGAN", "This is Vegan", "https://thisisvegan.cl", "tienda vegana"),
+                null, clasificador, 1);
+        List<ProductoListado> productos = fuente.parsear(fixture("woo-thisisvegan-products.json"));
+
+        assertThat(productos).hasSize(40);
+        assertThat(productos).extracting(ProductoListado::nombre).noneMatch(n -> n.contains("&#"));
+        List<OfertaDTO> ofertas = productos.stream()
+                .map(p -> p.aOferta("THIS_IS_VEGAN", "This is Vegan", clasificador, Instant.now()))
+                .flatMap(java.util.Optional::stream).toList();
+        assertThat(ofertas).isNotEmpty().allSatisfy(o -> assertThat(o.restricciones())
+                .contains(Restriccion.VEGANO, Restriccion.APLV, Restriccion.SIN_LACTOSA));
+    }
+
     private List<OfertaDTO> ofertas(FuenteBusquedaPaginada fuente, String archivo) throws IOException {
         Instant ahora = Instant.now();
         return fuente.parsear(fixture(archivo)).stream()
-                .map(p -> p.aOferta(fuente.nombre(), clasificador, ahora))
+                .map(p -> p.aOferta(fuente.nombre(), fuente.nombreVisible(), clasificador, ahora))
                 .flatMap(java.util.Optional::stream)
                 .toList();
     }

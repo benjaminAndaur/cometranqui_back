@@ -17,6 +17,8 @@ class ClasificadorRestriccionesTest {
         assertThat(c.clasificar("Pan Molde Multisemillas Sin Gluten 480 g", null)).containsExactly(SIN_GLUTEN);
         assertThat(c.clasificar("Galletas Libre de Gluten", null)).containsExactly(SIN_GLUTEN);
         assertThat(c.clasificar("Tostadas S/Gluten", null)).containsExactly(SIN_GLUTEN);
+        // Marca real en Unimarc
+        assertThat(c.clasificar("Pan de molde blanco No + Gluten 600 g", null)).containsExactly(SIN_GLUTEN);
     }
 
     @Test
