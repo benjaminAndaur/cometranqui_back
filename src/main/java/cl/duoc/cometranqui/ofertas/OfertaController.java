@@ -73,7 +73,8 @@ public class OfertaController {
     @GetMapping("/supermercados")
     List<SupermercadoResponse> supermercados() {
         return service.supermercados().stream()
-                .map(c -> new SupermercadoResponse(c.getSupermercado(), nombre(c.getSupermercado()), c.getOfertas()))
+                .map(c -> new SupermercadoResponse(c.getSupermercado(), nombre(c.getSupermercado(), c.getNombre()),
+                        c.getOfertas()))
                 .toList();
     }
 
@@ -87,15 +88,16 @@ public class OfertaController {
                 .toUpperCase();
     }
 
-    private static String nombre(String codigo) {
-        return NOMBRES.getOrDefault(codigo, codigo);
+    /** Prefiere el nombre que envía el scraper; el mapa cubre mensajes antiguos sin ese campo. */
+    private static String nombre(String codigo, String nombreEnviado) {
+        return nombreEnviado != null ? nombreEnviado : NOMBRES.getOrDefault(codigo, codigo);
     }
 
     private static OfertaResponse aResponse(Oferta o) {
         List<String> etiquetas = Arrays.stream(o.getRestricciones())
                 .map(c -> Restriccion.desde(c).map(Restriccion::etiqueta).orElse(c))
                 .toList();
-        return new OfertaResponse(o.getId(), o.getSupermercado(), nombre(o.getSupermercado()), o.getSku(),
+        return new OfertaResponse(o.getId(), o.getSupermercado(), nombre(o.getSupermercado(), o.getSupermercadoNombre()), o.getSku(),
                 o.getNombre(), o.getMarca(), o.getCategoria(), etiquetas, o.getPrecioNormal(), o.getPrecioOferta(),
                 o.getPorcentajeDescuento(), o.getUrlProducto(), o.getUrlImagen(),
                 o.getVigenteHasta() == null ? null : o.getVigenteHasta().toString(),

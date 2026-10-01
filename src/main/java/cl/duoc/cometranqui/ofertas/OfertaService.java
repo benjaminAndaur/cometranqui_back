@@ -55,7 +55,7 @@ public class OfertaService {
     public void procesar(OfertaMensaje m) {
         Optional<AlertaPrecio> alerta = tx.execute(estado -> {
             Optional<Oferta> anterior = repository.findBySupermercadoAndSku(m.supermercado(), m.sku());
-            int filas = repository.upsert(m.supermercado(), m.sku(), m.nombre(), m.marca(), m.categoria(),
+            int filas = repository.upsert(m.supermercado(), m.supermercadoNombre(), m.sku(), m.nombre(), m.marca(), m.categoria(),
                     m.restricciones().stream().map(Enum::name).sorted().collect(Collectors.joining(",", "{", "}")),
                     m.precioNormal(), m.precioOferta(), m.descuentoCalculado(), m.urlProducto(), m.urlImagen(),
                     m.vigenteHasta(), m.scrapeadoEn());

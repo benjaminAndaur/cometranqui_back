@@ -25,13 +25,14 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long> {
      */
     @Modifying
     @Query(nativeQuery = true, value = """
-            INSERT INTO oferta (supermercado, sku, nombre, marca, categoria, restricciones,
+            INSERT INTO oferta (supermercado, supermercado_nombre, sku, nombre, marca, categoria, restricciones,
                                 precio_normal, precio_oferta, porcentaje_descuento,
                                 url_producto, url_imagen, vigente_hasta, scrapeado_en, actualizado_en)
-            VALUES (:supermercado, :sku, :nombre, :marca, :categoria, CAST(:restricciones AS text[]),
+            VALUES (:supermercado, :supermercadoNombre, :sku, :nombre, :marca, :categoria, CAST(:restricciones AS text[]),
                     :precioNormal, :precioOferta, :porcentajeDescuento,
                     :urlProducto, :urlImagen, :vigenteHasta, :scrapeadoEn, now())
             ON CONFLICT (supermercado, sku) DO UPDATE SET
+                supermercado_nombre = COALESCE(EXCLUDED.supermercado_nombre, oferta.supermercado_nombre),
                 nombre = EXCLUDED.nombre,
                 marca = EXCLUDED.marca,
                 categoria = EXCLUDED.categoria,
@@ -47,6 +48,7 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long> {
             WHERE oferta.scrapeado_en <= EXCLUDED.scrapeado_en
             """)
     int upsert(@Param("supermercado") String supermercado,
+               @Param("supermercadoNombre") String supermercadoNombre,
                @Param("sku") String sku,
                @Param("nombre") String nombre,
                @Param("marca") String marca,
@@ -79,7 +81,7 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long> {
                         Pageable pageable);
 
     @Query(nativeQuery = true, value = """
-            SELECT o.supermercado AS supermercado, count(*) AS ofertas
+            SELECT o.supermercado AS supermercado, max(o.supermercado_nombre) AS nombre, count(*) AS ofertas
             FROM oferta o
             WHERE o.precio_oferta < o.precio_normal AND o.scrapeado_en >= :desde
             GROUP BY o.supermercado
@@ -89,6 +91,8 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long> {
 
     interface ConteoSupermercado {
         String getSupermercado();
+
+        String getNombre();
 
         long getOfertas();
     }

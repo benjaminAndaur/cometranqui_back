@@ -5,6 +5,7 @@
 #   ofertas.scrapeadas  3 particiones, key = supermercado, retención 7 días  -> ofertas del scraper
 #   ofertas.dlt         1 partición, retención 14 días                      -> mensajes que no se pudieron procesar
 #   ofertas.alertas     1 partición, retención 3 días                       -> bajas de precio >= 20%
+#   locales.scrapeados  3 particiones, key = id del local, COMPACTADO          -> último estado de cada local
 #
 # Uso:
 #   Dentro de un contenedor apache/kafka (kafka-init lo ejecuta solo):
@@ -33,5 +34,10 @@ crear_topic ofertas.scrapeadas 3 $((7 * DIA_MS))
 crear_topic ofertas.dlt        1 $((14 * DIA_MS))
 crear_topic ofertas.alertas    1 $((3 * DIA_MS))
 
+# Compactado: no expira por tiempo, conserva el último mensaje por key (tabla de estado de locales)
+"$KAFKA_BIN/kafka-topics.sh" --bootstrap-server "$BOOTSTRAP" --create --if-not-exists \
+  --topic locales.scrapeados --partitions 3 --replication-factor 1 \
+  --config cleanup.policy=compact --config segment.ms=3600000 --config min.cleanable.dirty.ratio=0.1
+
 "$KAFKA_BIN/kafka-topics.sh" --bootstrap-server "$BOOTSTRAP" --describe \
-  --topic 'ofertas\..*'
+  --topic '(ofertas|locales)\..*'

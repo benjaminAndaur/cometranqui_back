@@ -29,7 +29,7 @@ import org.apache.kafka.clients.admin.NewTopic;
  *
  * <p>Errores: 3 reintentos con backoff exponencial (1 s, 2 s, 4 s) y luego el registro se publica en
  * {@code ofertas.dlt} con headers {@code kafka_dlt-exception-*}. JSON inválido ({@code DeserializationException})
- * y {@link OfertaInvalidaException} no se reintentan: van directo a la DLT.
+ * y {@link MensajeInvalidoException} no se reintentan: van directo a la DLT.
  */
 @Configuration
 public class KafkaConfig {
@@ -52,6 +52,19 @@ public class KafkaConfig {
     NewTopic topicAlertas(@Value("${app.kafka.topic-alertas}") String nombre) {
         return TopicBuilder.name(nombre).partitions(1).replicas(1)
                 .config("retention.ms", String.valueOf(3 * DIA_MS)).build();
+    }
+
+    /**
+     * Topic compactado: Kafka conserva el último mensaje de cada key (id del local) en vez de borrar por tiempo.
+     * Funciona como una tabla de estado: un consumer nuevo que lee desde el inicio obtiene todos los locales.
+     * segment.ms de 1 h para que la compactación se note en la demo.
+     */
+    @Bean
+    NewTopic topicLocales(@Value("${app.kafka.topic-locales}") String nombre) {
+        return TopicBuilder.name(nombre).partitions(3).replicas(1).compact()
+                .config("segment.ms", String.valueOf(Duration.ofHours(1).toMillis()))
+                .config("min.cleanable.dirty.ratio", "0.1")
+                .build();
     }
 
     /**
@@ -83,7 +96,7 @@ public class KafkaConfig {
         ExponentialBackOff backOff = new ExponentialBackOff(backoffMs, 2.0);
         backOff.setMaxAttempts(reintentos);
         DefaultErrorHandler handler = new DefaultErrorHandler(recoverer, backOff);
-        handler.addNotRetryableExceptions(OfertaInvalidaException.class);
+        handler.addNotRetryableExceptions(MensajeInvalidoException.class);
         return handler;
     }
 }

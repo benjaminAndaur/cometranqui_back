@@ -158,6 +158,28 @@ class OfertasKafkaIntegrationTest {
                 .isEqualTo(2000);
     }
 
+    @Test
+    void localDeOsmSePersisteConNivelesPorRestriccion() throws Exception {
+        String local = """
+                {"id":"osm-node-1","fuente":"OSM","nombre":"Terra Sano","tipo":"Restaurante",
+                 "niveles":{"VEGANO":1,"APLV":1,"SIN_LACTOSA":1,"SIN_GLUTEN":3},"direccion":"Gorbea 1",
+                 "comuna":"Santiago","latitud":-33.45,"longitud":-70.66,"sitioWeb":null,"telefono":null,
+                 "horario":null,"urlFuente":"https://www.openstreetmap.org/node/1","scrapeadoEn":"%s"}"""
+                .formatted(Instant.now());
+        producer.send(new ProducerRecord<>("locales.scrapeados", "osm-node-1", local)).get();
+
+        await().atMost(Duration.ofSeconds(20)).untilAsserted(() ->
+                mvc.perform(get("/api/public/locales").param("restriccion", "Vegano").param("nivel", "1"))
+                        .andExpect(jsonPath("$.contenido[0].nombre").value("Terra Sano"))
+                        .andExpect(jsonPath("$.contenido[0].nivelNombre").value("Exclusivo / Certificado"))
+                        .andExpect(jsonPath("$.contenido[0].atribucion").value("© OpenStreetMap contributors (ODbL)")));
+        // Para celíacos el mismo local es solo nivel 3: no aparece si se piden exclusivos
+        mvc.perform(get("/api/public/locales").param("restriccion", "Sin Gluten").param("nivel", "1"))
+                .andExpect(jsonPath("$.totalElementos").value(0));
+        mvc.perform(get("/api/public/locales").param("restriccion", "Sin Gluten"))
+                .andExpect(jsonPath("$.contenido[0].nivel").value(3));
+    }
+
     private static void enviar(String key, String json) {
         try {
             producer.send(new ProducerRecord<>("ofertas.scrapeadas", key, json)).get();
@@ -168,7 +190,7 @@ class OfertasKafkaIntegrationTest {
 
     private static String oferta(String sku, int normal, int oferta, Instant scrapeadoEn) {
         return """
-                {"supermercado":"%s","sku":"%s","nombre":"Producto %s Sin Gluten","marca":"Marca",
+                {"supermercado":"%s","supermercadoNombre":null,"sku":"%s","nombre":"Producto %s Sin Gluten","marca":"Marca",
                  "categoria":"Despensa","restricciones":["SIN_GLUTEN"],"precioNormal":%d,"precioOferta":%d,
                  "porcentajeDescuento":0,"urlProducto":"https://example.com/%s","urlImagen":null,
                  "vigenteHasta":null,"scrapeadoEn":"%s"}"""

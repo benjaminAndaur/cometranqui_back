@@ -25,6 +25,7 @@ public class Oferta {
     private Long id;
 
     private String supermercado;
+    private String supermercadoNombre;
     private String sku;
     private String nombre;
     private String marca;
@@ -52,6 +53,10 @@ public class Oferta {
 
     public String getSupermercado() {
         return supermercado;
+    }
+
+    public String getSupermercadoNombre() {
+        return supermercadoNombre;
     }
 
     public String getSku() {

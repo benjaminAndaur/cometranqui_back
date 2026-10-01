@@ -55,6 +55,7 @@ app:
     topic-ofertas: ofertas.scrapeadas
     topic-dlt: ofertas.dlt
     topic-alertas: ofertas.alertas
+    topic-locales: locales.scrapeados
     reintentos: 3
     backoff-ms: 1000
   ofertas:

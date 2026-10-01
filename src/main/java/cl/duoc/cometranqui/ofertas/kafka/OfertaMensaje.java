@@ -24,6 +24,7 @@ import jakarta.validation.constraints.Size;
  */
 public record OfertaMensaje(
         @NotBlank @Size(max = 40) String supermercado,
+        @Size(max = 80) String supermercadoNombre,
         @NotBlank @Size(max = 64) String sku,
         @NotBlank @Size(max = 300) String nombre,
         @Size(max = 120) String marca,

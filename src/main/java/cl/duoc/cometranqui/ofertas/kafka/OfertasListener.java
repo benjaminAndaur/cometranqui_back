@@ -39,7 +39,7 @@ public class OfertasListener {
         OfertaMensaje mensaje = registro.value();
         Set<ConstraintViolation<OfertaMensaje>> errores = validator.validate(mensaje);
         if (!errores.isEmpty()) {
-            throw new OfertaInvalidaException(errores.stream()
+            throw new MensajeInvalidoException(errores.stream()
                     .map(v -> v.getPropertyPath() + " " + v.getMessage())
                     .sorted()
                     .collect(Collectors.joining("; ")));
