@@ -99,10 +99,12 @@ fi
 log "Asociando Elastic IP"
 aws ec2 associate-address --instance-id "$INSTANCE_ID" --allocation-id "$EIP_ALLOC" --allow-reassociation >/dev/null
 
-log "Esperando a que Kafka responda en $EIP:9092 (el user-data tarda ~3 min)"
-for i in $(seq 1 60); do
-  if (exec 3<>"/dev/tcp/$EIP/9092") 2>/dev/null; then echo "  Kafka escuchando"; break; fi
-  sleep 10
+log "Esperando a que el user-data instale Kafka, cree el usuario SCRAM y los topics (~3 min)"
+for i in $(seq 1 40); do
+  if ssh_a "$EIP" 'sudo docker logs kafka-init 2>&1 | grep -q "Completed updating config for user"' 2>/dev/null; then
+    echo "  Kafka listo"; break
+  fi
+  sleep 15
 done
 
 cat <<EOF
