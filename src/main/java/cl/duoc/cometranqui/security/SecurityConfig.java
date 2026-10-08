@@ -1,5 +1,6 @@
 package cl.duoc.cometranqui.security;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -59,11 +60,15 @@ public class SecurityConfig {
         return decoder;
     }
 
+    /** {@code app.security.allowed-origin} admite varios orígenes separados por coma (EC2 y Vercel). */
     @Bean
     CorsConfigurationSource corsConfigurationSource(
-            @Value("${app.security.allowed-origin}") String allowedOrigin) {
+            @Value("${app.security.allowed-origin}") String allowedOrigins) {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(allowedOrigin));
+        configuration.setAllowedOrigins(Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(origen -> !origen.isEmpty())
+                .toList());
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);

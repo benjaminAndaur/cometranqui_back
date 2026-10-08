@@ -23,7 +23,7 @@ umask 077
 cat > "$ENV_FILE" <<EOF
 COGNITO_ISSUER_URI=https://cognito-idp.$AWS_REGION.amazonaws.com/us-east-1_QHxXWVmGx
 COGNITO_CLIENT_ID=6f7sgt9cri682felac9ddc706c
-FRONTEND_ORIGIN=https://$FRONTEND_IP
+FRONTEND_ORIGIN=https://$FRONTEND_IP,https://cometranqui.vercel.app
 PORT=8080
 DB_URL=$DB_URL
 DB_USER=$DB_USER
