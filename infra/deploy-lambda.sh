@@ -22,6 +22,8 @@ umask 077
 cat > "$ENV_JSON" <<EOF
 {"Variables":{
   "KAFKA_BOOTSTRAP":"$KAFKA_BOOTSTRAP",
+  "KAFKA_TOPIC":"$(catalogo_topic ofertas-scrapeadas)",
+  "KAFKA_TOPIC_LOCALES":"$(catalogo_topic locales-scrapeados)",
   "KAFKA_USER":"$KAFKA_USER",
   "KAFKA_PASS":"$(param /cometranqui/kafka/pass)",
   "FUENTES_ACTIVAS":"TODAS",

@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-import cl.duoc.cometranqui.locales.kafka.LocalMensaje;
+import cl.duoc.cometranqui.eventos.LocalMensaje;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

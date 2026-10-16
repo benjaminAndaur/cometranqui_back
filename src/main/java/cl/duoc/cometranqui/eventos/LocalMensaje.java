@@ -1,4 +1,4 @@
-package cl.duoc.cometranqui.locales.kafka;
+package cl.duoc.cometranqui.eventos;
 
 import java.time.Instant;
 import java.util.Map;

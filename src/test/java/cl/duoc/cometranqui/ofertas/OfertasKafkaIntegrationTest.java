@@ -62,7 +62,7 @@ class OfertasKafkaIntegrationTest {
         r.add("spring.datasource.password", POSTGRES::getPassword);
         r.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> "http://localhost/no-usado");
         r.add("app.security.cognito-client-id", () -> "test");
-        r.add("app.kafka.backoff-ms", () -> "100");
+        r.add("app.mensajeria.reintentos.backoff-inicial", () -> "100ms");
     }
 
     /** Evita que SecurityConfig descargue el JWKS de Cognito al arrancar. */

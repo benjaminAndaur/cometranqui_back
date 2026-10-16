@@ -15,7 +15,7 @@ spring:
     username: ${DB_USER:cometranqui}
     password: ${DB_PASS:cometranqui}
     hikari:
-      maximum-pool-size: 5
+      maximum-pool-size: 8
   jpa:
     open-in-view: false
     hibernate:
@@ -23,6 +23,7 @@ spring:
   flyway:
     enabled: true
 
+  # Conexión al broker (cómo conectarse). QUÉ canales y rutas existen está en app.mensajeria, más abajo.
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
     properties:
@@ -31,33 +32,93 @@ spring:
       sasl.mechanism: SCRAM-SHA-512
       sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="${KAFKA_USER:}" password="${KAFKA_PASS:}";
     consumer:
-      group-id: cometranqui-api-ofertas
       auto-offset-reset: earliest
       enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.value.default.type: cl.duoc.cometranqui.ofertas.kafka.OfertaMensaje
         spring.json.use.type.headers: false
     producer:
       acks: all
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
     listener:
       ack-mode: manual_immediate
-      concurrency: 3
 
 app:
   security:
     cognito-client-id: ${COGNITO_CLIENT_ID}
     allowed-origin: ${FRONTEND_ORIGIN:http://localhost:3000}
-  kafka:
-    topic-ofertas: ofertas.scrapeadas
-    topic-dlt: ofertas.dlt
-    topic-alertas: ofertas.alertas
-    topic-locales: locales.scrapeados
-    reintentos: 3
-    backoff-ms: 1000
+
+  # ═══════════════════════════════════════════════════════════════════════════════════════════════════
+  #  CATÁLOGO DE MENSAJERÍA: única fuente de verdad de canales (destinos) y rutas (quién consume qué).
+  #  - Los topics se crean al arrancar a partir de "destinos" (mensajeria/config/TopicsConfig).
+  #  - Los consumidores leen topic, grupo y concurrencia desde "rutas" (SpEL @catalogo en cada @KafkaListener).
+  #  - El productor externo (Lambda) recibe los nombres desde aquí vía infra/deploy-lambda.sh.
+  #  - Al arrancar se valida que cada ruta apunte a un destino existente (MensajeriaProperties).
+  #  Cambiar un nombre, la retención o las particiones se hace SOLO en este bloque.
+  # ═══════════════════════════════════════════════════════════════════════════════════════════════════
+  mensajeria:
+    destinos:
+      ofertas-scrapeadas:
+        topic: ofertas.scrapeadas
+        particiones: 3
+        retencion: 7d
+        descripcion: Ofertas publicadas por el scraper (key = tienda, orden por tienda)
+      locales-scrapeados:
+        topic: locales.scrapeados
+        particiones: 3
+        limpieza: compact
+        config:
+          "[segment.ms]": "3600000"
+          "[min.cleanable.dirty.ratio]": "0.1"
+        descripcion: Estado de cada local (key = id del local; compactado, guarda el último)
+      alertas-precio:
+        topic: ofertas.alertas
+        particiones: 1
+        retencion: 3d
+        descripcion: Bajas de precio detectadas al guardar una oferta; entrada del enrutador
+      notificaciones:
+        prefijo: notificaciones.
+        particiones: 1
+        retencion: 7d
+        descripcion: Familia de destinos por restricción (notificaciones.sin-gluten, ...), creados por reglas
+      fallidos:
+        topic: ofertas.dlt
+        particiones: 1
+        retencion: 14d
+        descripcion: Dead Letter Topic de todos los consumidores, con headers de diagnóstico
+    rutas:
+      persistir-ofertas:
+        origen: ofertas-scrapeadas
+        grupo: cometranqui-api-ofertas
+        concurrencia: 3
+        descripcion: Valida y guarda ofertas (UPSERT); puede generar alertas de precio
+      persistir-locales:
+        origen: locales-scrapeados
+        grupo: cometranqui-api-locales
+        concurrencia: 3
+        descripcion: Actualiza locales y sus niveles por restricción
+      enrutar-alertas:
+        origen: alertas-precio
+        grupo: cometranqui-enrutador
+        concurrencia: 1
+        descripcion: Aplica las reglas de distribución y reenvía a los destinos de notificaciones
+      notificar-usuarios:
+        origen: notificaciones
+        grupo: cometranqui-notificaciones
+        concurrencia: 1
+        descripcion: Crea notificaciones para los usuarios suscritos a la restricción
+      registrar-fallidos:
+        origen: fallidos
+        grupo: cometranqui-fallidos
+        concurrencia: 1
+        descripcion: Registra los mensajes fallidos y su diagnóstico para revisión y reproceso
+    reintentos:
+      intentos: 3
+      backoff-inicial: 1s
+      multiplicador: 2.0
+
   ofertas:
     # Porcentaje de baja de precio que dispara un mensaje en ofertas.alertas
     umbral-alerta-pct: 20
