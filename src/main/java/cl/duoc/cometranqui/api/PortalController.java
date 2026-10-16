@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.duoc.cometranqui.locales.LocalService;
+
 @RestController
 @RequestMapping("/api")
 public class PortalController {
 
-    private static final List<Map<String, Object>> LOCALES = List.of(
+    /** Respaldo de EP1 mientras la tabla local esté vacía (antes de la primera ejecución del scraper). */
+    private static final List<Map<String, Object>> LOCALES_EJEMPLO = List.of(
             Map.of(
                     "id", 1,
                     "nombre", "Panadería Sin Trazas",
@@ -38,6 +41,12 @@ public class PortalController {
                     "nivel", 3,
                     "nivelNombre", "Opción Básica"));
 
+    private final LocalService locales;
+
+    public PortalController(LocalService locales) {
+        this.locales = locales;
+    }
+
     @GetMapping("/public/health")
     Map<String, Object> health() {
         return Map.of("status", "ok", "timestamp", Instant.now().toString());
@@ -54,8 +63,27 @@ public class PortalController {
         return response;
     }
 
+    /**
+     * Mismo formato que consume el frontend (id, nombre, comuna, restricciones, nivel, nivelNombre), ahora con
+     * los locales reales que llegan por Kafka. Primero los de mejor nivel.
+     */
     @GetMapping("/user/locales")
-    List<Map<String, Object>> locales() {
-        return LOCALES;
+    List<?> locales() {
+        if (locales.contar() == 0) {
+            return LOCALES_EJEMPLO;
+        }
+        return locales.buscar(null, 3, null, 0, 200).stream()
+                .sorted((a, b) -> Integer.compare(a.nivel(), b.nivel()))
+                .map(l -> {
+                    Map<String, Object> m = new LinkedHashMap<>();
+                    m.put("id", l.id());
+                    m.put("nombre", l.nombre());
+                    m.put("comuna", l.comuna() != null ? l.comuna() : "");
+                    m.put("restricciones", l.restricciones());
+                    m.put("nivel", l.nivel());
+                    m.put("nivelNombre", l.nivelNombre());
+                    return m;
+                })
+                .toList();
     }
 }

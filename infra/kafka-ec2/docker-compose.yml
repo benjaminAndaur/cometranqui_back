@@ -1,0 +1,81 @@
+# Broker Kafka de producción (EC2 t3.small, Amazon Linux 2023). Lo instala infra/01-kafka-ec2.sh en /opt/kafka.
+# Mismos listeners que el compose local:
+#   INTERNAL   PLAINTEXT 29092  solo red Docker (Kafka UI, scripts de administración vía docker exec)
+#   EXTERNAL   SASL_PLAINTEXT + SCRAM-SHA-512 9092  Lambda (fuera de VPC) y backend
+#   CONTROLLER 9093  quórum KRaft
+# Variables en /opt/kafka/.env (las escribe el user-data leyendo SSM): KAFKA_ADVERTISED_HOST, KAFKA_USER,
+# KAFKA_PASS, KAFKA_UI_PASS
+services:
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+    environment:
+      CLUSTER_ID: cometranqui-prod-kraft-01
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENERS: INTERNAL://:29092,EXTERNAL://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://${KAFKA_ADVERTISED_HOST}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:SASL_PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_SASL_ENABLED_MECHANISMS: SCRAM-SHA-512
+      KAFKA_LISTENER_NAME_EXTERNAL_SCRAM___SHA___512_SASL_JAAS_CONFIG: org.apache.kafka.common.security.scram.ScramLoginModule required;
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_HEAP_OPTS: -Xmx512m -Xms512m
+    volumes:
+      - kafkadata:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server kafka:29092 > /dev/null 2>&1"]
+      interval: 10s
+      retries: 30
+
+  kafka-init:
+    image: apache/kafka:3.8.0
+    container_name: kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_USER: ${KAFKA_USER}
+      KAFKA_PASS: ${KAFKA_PASS}
+      BOOTSTRAP: kafka:29092
+    volumes:
+      - ./kafka-topics.sh:/scripts/kafka-topics.sh:ro
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        /opt/kafka/bin/kafka-configs.sh --bootstrap-server kafka:29092 --alter \
+          --add-config "SCRAM-SHA-512=[iterations=8192,password=$${KAFKA_PASS}]" \
+          --entity-type users --entity-name "$${KAFKA_USER}"
+        KAFKA_BIN=/opt/kafka/bin bash /scripts/kafka-topics.sh
+    restart: "no"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8081:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: cometranqui-aws
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      DYNAMIC_CONFIG_ENABLED: "false"
+      # Además del Security Group (8081 solo a la IP del administrador), login con usuario/clave
+      AUTH_TYPE: LOGIN_FORM
+      SPRING_SECURITY_USER_NAME: admin
+      SPRING_SECURITY_USER_PASSWORD: ${KAFKA_UI_PASS}
+      JAVA_OPTS: -Xmx256m
+
+volumes:
+  kafkadata:
