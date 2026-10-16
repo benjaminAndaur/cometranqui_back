@@ -44,6 +44,10 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
     listener:
       ack-mode: manual_immediate
+  jackson:
+    mapper:
+      # "delete" o "DELETE" en las solicitudes de administración
+      accept-case-insensitive-enums: true
 
 app:
   security:
@@ -82,7 +86,8 @@ app:
         prefijo: notificaciones.
         particiones: 1
         retencion: 7d
-        descripcion: Familia de destinos por restricción (notificaciones.sin-gluten, ...), creados por reglas
+        iniciales: [notificaciones.sin-gluten, notificaciones.sin-lactosa, notificaciones.aplv, notificaciones.vegano]
+        descripcion: Familia de destinos por restricción; las reglas de distribución eligen a cuál va cada alerta
       fallidos:
         topic: ofertas.dlt
         particiones: 1
