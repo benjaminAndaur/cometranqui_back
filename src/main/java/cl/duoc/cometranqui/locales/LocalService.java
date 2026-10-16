@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cl.duoc.cometranqui.locales.kafka.LocalMensaje;
+import cl.duoc.cometranqui.eventos.LocalMensaje;
 import cl.duoc.cometranqui.ofertas.Restriccion;
 
 @Service

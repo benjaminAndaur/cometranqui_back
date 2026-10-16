@@ -34,6 +34,16 @@ DB_NAME="cometranqui"
 # Ruta para file:// del AWS CLI (en Git Bash de Windows el CLI no entiende /tmp/...)
 ruta_cli() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else echo "$1"; fi; }
 
+# Nombre de topic de un destino del catálogo app.mensajeria (application.yml), para no duplicarlo en scripts.
+#   catalogo_topic ofertas-scrapeadas  ->  ofertas.scrapeadas
+catalogo_topic() {
+  awk -v destino="      $1:" '
+    $0 == destino { dentro = 1; next }
+    dentro && /^      [a-z]/ { exit }
+    dentro && $1 == "topic:" { print $2; exit }
+  ' "$REPO_DIR/src/main/resources/application.yml"
+}
+
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 
 # IP pública de quien ejecuta el script (para abrir SSH y Kafka UI solo a esa IP)

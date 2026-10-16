@@ -51,7 +51,7 @@ services:
       interval: 5s
       retries: 20
 
-  # Tarea única: crea el usuario SCRAM y los topics (idempotente).
+  # Tarea única: crea el usuario SCRAM (idempotente). Los topics los crea la API desde el catálogo app.mensajeria.
   kafka-init:
     image: apache/kafka:3.8.0
     container_name: cometranqui-kafka-init
