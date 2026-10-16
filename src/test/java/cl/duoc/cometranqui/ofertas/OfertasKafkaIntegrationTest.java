@@ -17,76 +17,25 @@ import java.util.UUID;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.kafka.KafkaContainer;
+
+import cl.duoc.cometranqui.IntegracionKafkaBase;
 
 /**
  * Flujo completo del consumer contra Kafka y PostgreSQL reales (Testcontainers):
  * mensaje válido -> UPSERT idempotente -> endpoint público; JSON/validación inválida -> DLT; baja de precio -> alerta.
  */
-@SpringBootTest
-@AutoConfigureMockMvc
-@Testcontainers
-class OfertasKafkaIntegrationTest {
-
-    @Container
-    static final KafkaContainer KAFKA = new KafkaContainer("apache/kafka:3.8.0");
-
-    @Container
-    static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:16-alpine");
-
-    @DynamicPropertySource
-    static void propiedades(DynamicPropertyRegistry r) {
-        r.add("spring.kafka.bootstrap-servers", KAFKA::getBootstrapServers);
-        r.add("spring.kafka.properties.security.protocol", () -> "PLAINTEXT");
-        r.add("spring.datasource.url", POSTGRES::getJdbcUrl);
-        r.add("spring.datasource.username", POSTGRES::getUsername);
-        r.add("spring.datasource.password", POSTGRES::getPassword);
-        r.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> "http://localhost/no-usado");
-        r.add("app.security.cognito-client-id", () -> "test");
-        r.add("app.mensajeria.reintentos.backoff-inicial", () -> "100ms");
-    }
-
-    /** Evita que SecurityConfig descargue el JWKS de Cognito al arrancar. */
-    @MockBean
-    NimbusJwtDecoder jwtDecoder;
+class OfertasKafkaIntegrationTest extends IntegracionKafkaBase {
 
     @Autowired
     MockMvc mvc;
 
     @Autowired
     OfertaRepository repository;
-
-    static KafkaProducer<String, String> producer;
-
-    @BeforeAll
-    static void crearProductor() {
-        producer = new KafkaProducer<>(Map.of(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA.getBootstrapServers()),
-                new StringSerializer(), new StringSerializer());
-    }
-
-    @AfterAll
-    static void cerrarProductor() {
-        producer.close();
-    }
 
     @Test
     void ofertaValidaSePersisteUnaSolaVezYSeExponeEnElEndpointPublico() throws Exception {
@@ -166,7 +115,7 @@ class OfertasKafkaIntegrationTest {
                  "comuna":"Santiago","latitud":-33.45,"longitud":-70.66,"sitioWeb":null,"telefono":null,
                  "horario":null,"urlFuente":"https://www.openstreetmap.org/node/1","scrapeadoEn":"%s"}"""
                 .formatted(Instant.now());
-        producer.send(new ProducerRecord<>("locales.scrapeados", "osm-node-1", local)).get();
+        PRODUCTOR.send(new ProducerRecord<>("locales.scrapeados", "osm-node-1", local)).get();
 
         await().atMost(Duration.ofSeconds(20)).untilAsserted(() ->
                 mvc.perform(get("/api/public/locales").param("restriccion", "Vegano").param("nivel", "1"))
@@ -182,7 +131,7 @@ class OfertasKafkaIntegrationTest {
 
     private static void enviar(String key, String json) {
         try {
-            producer.send(new ProducerRecord<>("ofertas.scrapeadas", key, json)).get();
+            PRODUCTOR.send(new ProducerRecord<>("ofertas.scrapeadas", key, json)).get();
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

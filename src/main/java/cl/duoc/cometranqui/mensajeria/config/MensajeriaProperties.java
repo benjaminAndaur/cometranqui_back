@@ -1,6 +1,7 @@
 package cl.duoc.cometranqui.mensajeria.config;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -37,7 +38,13 @@ public record MensajeriaProperties(
             Duration retencion,
             Limpieza limpieza,
             Map<String, String> config,
+            List<String> iniciales,
             String descripcion) {
+
+        /** Miembros de una familia que se crean al arrancar (los demás se crean desde la administración). */
+        public List<String> inicialesOVacia() {
+            return iniciales == null ? List.of() : iniciales;
+        }
 
         public int particionesOPorDefecto() {
             return particiones == null ? 1 : particiones;

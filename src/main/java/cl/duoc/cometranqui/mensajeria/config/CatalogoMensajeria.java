@@ -40,6 +40,9 @@ public class CatalogoMensajeria {
             if (tieneTopic == d.esFamilia()) {
                 errores.add("El destino '" + clave + "' debe declarar 'topic' o 'prefijo' (solo uno)");
             }
+            d.inicialesOVacia().stream()
+                    .filter(t -> !d.esFamilia() || !t.startsWith(d.prefijo()))
+                    .forEach(t -> errores.add("El topic inicial '" + t + "' no pertenece a la familia '" + clave + "'"));
         });
         propiedades.rutas().forEach((clave, r) -> {
             if (!propiedades.destinos().containsKey(r.origen())) {

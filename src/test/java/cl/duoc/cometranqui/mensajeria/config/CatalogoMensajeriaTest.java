@@ -17,11 +17,11 @@ class CatalogoMensajeriaTest {
     private static final Reintentos REINTENTOS = new Reintentos(3, Duration.ofSeconds(1), 2.0);
 
     private static Destino fijo(String topic) {
-        return new Destino(topic, null, 3, Duration.ofDays(7), null, null, null);
+        return new Destino(topic, null, 3, Duration.ofDays(7), null, null, null, null);
     }
 
     private static Destino familia(String prefijo) {
-        return new Destino(null, prefijo, 1, null, null, null, null);
+        return new Destino(null, prefijo, 1, null, null, null, null, null);
     }
 
     @Test
@@ -54,7 +54,7 @@ class CatalogoMensajeriaTest {
     @Test
     void unDestinoSinTopicNiPrefijoImpideArrancar() {
         assertThatThrownBy(() -> new CatalogoMensajeria(new MensajeriaProperties(
-                Map.of("roto", new Destino(null, null, 1, null, null, null, null)),
+                Map.of("roto", new Destino(null, null, 1, null, null, null, null, null)),
                 Map.of(),
                 REINTENTOS)))
                 .isInstanceOf(IllegalStateException.class)

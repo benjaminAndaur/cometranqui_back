@@ -13,8 +13,8 @@ import cl.duoc.cometranqui.mensajeria.config.MensajeriaProperties.Destino;
 import cl.duoc.cometranqui.mensajeria.config.MensajeriaProperties.Limpieza;
 
 /**
- * Crea al arrancar los topics fijos declarados en el catálogo (si ya existen, Kafka los deja como están).
- * Las familias ({@code prefijo}) no se crean aquí: sus miembros los crea la administración.
+ * Crea al arrancar los topics del catálogo (si ya existen, Kafka los deja como están): los destinos fijos y los
+ * miembros iniciales de cada familia. Los demás miembros de una familia se crean desde la administración.
  */
 @Configuration
 public class TopicsConfig {
@@ -22,8 +22,9 @@ public class TopicsConfig {
     @Bean
     KafkaAdmin.NewTopics topicsDelCatalogo(CatalogoMensajeria catalogo) {
         return new KafkaAdmin.NewTopics(catalogo.destinos().values().stream()
-                .filter(d -> !d.esFamilia())
-                .map(TopicsConfig::aNewTopic)
+                .flatMap(d -> d.esFamilia()
+                        ? d.inicialesOVacia().stream().map(nombre -> aNewTopic(nombre, d))
+                        : java.util.stream.Stream.of(aNewTopic(d.topic(), d)))
                 .toArray(NewTopic[]::new));
     }
 
@@ -41,8 +42,8 @@ public class TopicsConfig {
         return config;
     }
 
-    private static NewTopic aNewTopic(Destino d) {
-        return TopicBuilder.name(d.topic())
+    private static NewTopic aNewTopic(String nombre, Destino d) {
+        return TopicBuilder.name(nombre)
                 .partitions(d.particionesOPorDefecto())
                 .replicas(1)
                 .configs(configuracionKafka(d))

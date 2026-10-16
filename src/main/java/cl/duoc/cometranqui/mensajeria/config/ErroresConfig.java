@@ -20,7 +20,7 @@ import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.DelegatingByTypeSerializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import org.springframework.util.backoff.ExponentialBackOff;
+import org.springframework.kafka.support.ExponentialBackOffWithMaxRetries;
 
 import cl.duoc.cometranqui.mensajeria.MensajeInvalidoException;
 
@@ -70,8 +70,10 @@ public class ErroresConfig {
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(template,
                 (registro, error) -> new TopicPartition(topicDlt, -1));
         MensajeriaProperties.Reintentos r = catalogo.reintentos();
-        ExponentialBackOff backOff = new ExponentialBackOff(r.backoffInicial().toMillis(), r.multiplicador());
-        backOff.setMaxAttempts(r.intentos());
+        // "intentos" = reintentos después del primer fallo (3 → 4 entregas en total: 1 s, 2 s, 4 s)
+        ExponentialBackOffWithMaxRetries backOff = new ExponentialBackOffWithMaxRetries(r.intentos());
+        backOff.setInitialInterval(r.backoffInicial().toMillis());
+        backOff.setMultiplier(r.multiplicador());
         DefaultErrorHandler handler = new DefaultErrorHandler(recoverer, backOff);
         // DeserializationException y MessageConversionException ya son no reintentables por defecto
         handler.addNotRetryableExceptions(MensajeInvalidoException.class, DataIntegrityViolationException.class);
