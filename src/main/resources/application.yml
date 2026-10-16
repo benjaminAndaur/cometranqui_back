@@ -45,6 +45,9 @@ spring:
     listener:
       ack-mode: manual_immediate
   jackson:
+    serialization:
+      # Duraciones del catálogo como texto ISO-8601 (PT168H) en vez de segundos
+      write-durations-as-timestamps: false
     mapper:
       # "delete" o "DELETE" en las solicitudes de administración
       accept-case-insensitive-enums: true
