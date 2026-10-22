@@ -13,6 +13,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.common.TopicPartition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -65,6 +68,9 @@ class MensajeriaFlujosIntegrationTest extends IntegracionKafkaBase {
 
     @Autowired
     PruebasMensajeriaService pruebas;
+
+    @Autowired
+    AdminClient adminClient;
 
     // ── Distribución (criterio 2) ─────────────────────────────────────────────
 
@@ -175,6 +181,16 @@ class MensajeriaFlujosIntegrationTest extends IntegracionKafkaBase {
 
         await().atMost(ESPERA).until(() -> !fallidosDe("DEF-1").isEmpty());
         verify(ofertaService, times(1)).procesar(argThat((OfertaMensaje m) -> m != null && m.sku().equals("DEF-1")));
+
+        // Tras apartarlo en la DLT el offset queda confirmado: no hay lag ni reentrega al reiniciar
+        MensajeFallido fallido = fallidosDe("DEF-1").get(0);
+        TopicPartition particion = new TopicPartition(fallido.getTopicOrigen(), fallido.getParticionOrigen());
+        await().atMost(ESPERA).untilAsserted(() -> {
+            OffsetAndMetadata confirmado = adminClient.listConsumerGroupOffsets("cometranqui-api-ofertas")
+                    .partitionsToOffsetAndMetadata().get().get(particion);
+            assertThat(confirmado).isNotNull();
+            assertThat(confirmado.offset()).isGreaterThan(fallido.getOffsetOrigen());
+        });
     }
 
     @Test

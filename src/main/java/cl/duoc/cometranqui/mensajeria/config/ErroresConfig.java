@@ -77,6 +77,8 @@ public class ErroresConfig {
         DefaultErrorHandler handler = new DefaultErrorHandler(recoverer, backOff);
         // DeserializationException y MessageConversionException ya son no reintentables por defecto
         handler.addNotRetryableExceptions(MensajeInvalidoException.class, DataIntegrityViolationException.class);
+        // con ack manual Spring no confirma el registro enviado a la DLT: sin esto queda lag y se reentrega al reiniciar
+        handler.setCommitRecovered(true);
         handler.setRetryListeners((registro, error, intento) -> log.warn("Reintento {}/{} de {}-{}@{}: {}",
                 intento, r.intentos(), registro.topic(), registro.partition(), registro.offset(), error.getMessage()));
         return handler;

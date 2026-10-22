@@ -36,10 +36,12 @@ class FallidosConfig {
         var factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
         factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(config));
         factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
-        factory.setCommonErrorHandler(new DefaultErrorHandler(
+        var handler = new DefaultErrorHandler(
                 (registro, error) -> log.error("No se pudo registrar el mensaje fallido {}-{}@{}: {}",
                         registro.topic(), registro.partition(), registro.offset(), error.getMessage()),
-                new FixedBackOff(1000L, 2)));
+                new FixedBackOff(1000L, 2));
+        handler.setCommitRecovered(true); // ack manual: confirmar también el registro descartado
+        factory.setCommonErrorHandler(handler);
         return factory;
     }
 }
